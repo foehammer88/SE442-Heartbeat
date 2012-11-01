@@ -7,5 +7,7 @@
  *
  */
 public class Alarm {
-
+	public void testmethod() { 
+		
+	}
 }
