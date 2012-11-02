@@ -8,7 +8,7 @@
  */
 public class History {
 	
-	BedInterface bedInterface = new BedInterface;
+	BedInterface bedInterface = new BedInterface();
 	
 	
 

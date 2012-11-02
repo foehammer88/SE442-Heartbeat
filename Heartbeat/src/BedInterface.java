@@ -8,7 +8,7 @@
  */
 public class BedInterface {
 	
-	BedView bedView = new BedView;
+	BedView bedView = new BedView();
 	
 
 }
