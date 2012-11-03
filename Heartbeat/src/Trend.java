@@ -6,6 +6,6 @@
  * @author Patrick
  *
  */
-public class Trend {
-
+public class Trend{
+	
 }
