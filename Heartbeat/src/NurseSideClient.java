@@ -1,9 +1,16 @@
-/**
- * 
- */
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class NurseSideClient {
-	public void testmethod() { 
+
+public class NurseSideClient extends UnicastRemoteObject{
+	
+	/**
+	 * Constructor
+	 * @throws RemoteException
+	 */
+	public NurseSideClient() throws RemoteException{ 
 		
 	}
+	
+	
 }
