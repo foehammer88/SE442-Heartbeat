@@ -6,18 +6,20 @@ import java.rmi.RemoteException;
 
 public class BedSideRMIImpl implements BedSideRMI{
 
-	private String patientID; 
 	private String nurseRegistryID;
 	private String rmiRegistryName = "Bed-Side-RMI";
 	
-	public void getPatientTrendInfo(String patientID) throws RemoteException { 
+	public synchronized void getPatientTrendInfo(String patientID) throws RemoteException { 
 		
 	}
 	
-	public void registerPatientToBedSide(String patientID, String nurseRegistryID) throws RemoteException { 
+	public synchronized void registerPatientToBedSide(String patientName, String patientID, String nurseRegistryID, String admitDate) throws RemoteException { 
 		
-		this.patientID = patientID; 
-		this.nurseRegistryID = nurseRegistryID; 
+		
+	}
+	
+	public synchronized void dischargePatientFromBedSide(String patientId, String dischargeDate) throws RemoteException { 
+		
 	}
 	
 	private void startBedSideRMI() throws RemoteException, MalformedURLException { 

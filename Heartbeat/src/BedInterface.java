@@ -8,7 +8,14 @@
  */
 public class BedInterface {
 	
-	BedView bedView = new BedView();
+	private Patient patient; 
+	private BedView bedView; 
 	
-
+	/**
+	 * Constructor
+	 */
+	public BedInterface() { 
+		
+	}
+	
 }
