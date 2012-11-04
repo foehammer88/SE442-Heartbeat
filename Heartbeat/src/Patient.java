@@ -23,6 +23,7 @@ public class Patient implements Runnable {
 	private Integer patientRespRate;
 	private Integer patientRespRateHigh;
 	private Integer patientRespRateLow;
+	private String patientType;
 	private Date timeStamp = new Date();
 	private Integer interval;
 	private Integer[] patientHistory = new Integer[7];
@@ -34,32 +35,17 @@ public class Patient implements Runnable {
 	 * @param patientId - ID of Patient
 	 * @param patientAdmitDate - Admit date of patient 
 	 * @param patientDischargeDate - Discharge date of patient 
+	 * @param patientType - Determines ranges used and the type of patient
 	 * @param interval - Designated interval for generating vital signs
-	 * @param patientBPHigh - High number for blood pressure range
-	 * @param patientBPLow - Low number for blood pressure range
-	 * @param patientTempHigh - High number for temperature range
-	 * @param patientTempLow - Low number for temperature range
-	 * @param patientPulseHigh - High number for pulse range
-	 * @param patientPulseLow - Low number for pulse range
-	 * @param patientRespRateHigh - High number for respiratory rate range
-	 * @param patientRespRateLow - Low number for respiratory rate range
 	 */
 	public Patient(String patientName, String patientId, String patientAdmitDate, String patientDischargeDate
-			, Integer interval, Integer patientBPHigh, Integer patientBPLow, Integer patientTempHigh, Integer patientTempLow, 
-			Integer patientPulseHigh, Integer patientPulseLow, Integer patientRespRateHigh, Integer patientRespRateLow){ 
+			, String patientType, Integer interval){ 
 		
 		this.patientName = patientName; 
 		this.patientID = patientId; 
 		this.patientAdmitDate = patientAdmitDate; 
 		this.patientDischargeDate = patientDischargeDate;
-		this.patientBPHigh = patientBPHigh;
-		this.patientBPLow = patientBPLow;
-		this.patientTempHigh = patientTempHigh;
-		this.patientTempLow = patientTempLow;
-		this.patientPulseHigh = patientPulseHigh;
-		this.patientPulseLow = patientPulseLow;
-		this.patientRespRateHigh = patientRespRateHigh;
-		this.patientRespRateLow = patientRespRateLow;
+		this.patientType = patientType;
 		this.interval = interval;
 		
 	}
@@ -85,9 +71,55 @@ public class Patient implements Runnable {
 		return "blah";
 	}
 	
+	
 	//Generates all patients vital signs
 	//Time Stamp, Blood Pressure, Pulse, Temperature, Respiratory Rate, Alarm type, Alarm Acknowledged
 	private void generateVitalSigns(){
+		
+		if(patientType == "Adult"){
+			
+			patientBPHigh = 120;
+			patientBPLow = 110;
+			patientPulseHigh = 105;
+			patientPulseLow = 55;
+			patientTempHigh = 100;
+			patientTempLow = 97;
+			patientRespRateHigh = 20;
+			patientRespRateLow = 10;
+			
+		}else if(patientType == "Child"){
+			
+			patientBPHigh = 120;
+			patientBPLow = 80;
+			patientPulseHigh = 110;
+			patientPulseLow = 70;
+			patientTempHigh = 100;
+			patientTempLow = 97;
+			patientRespRateHigh = 30;
+			patientRespRateLow = 20;
+			
+		}else if(patientType == "Infant"){
+			
+			patientBPHigh = 100;
+			patientBPLow = 70;
+			patientPulseHigh = 140;
+			patientPulseLow = 80;
+			patientTempHigh = 100;
+			patientTempLow = 97;
+			patientRespRateHigh = 30;
+			patientRespRateLow = 20;
+			
+		}else if(patientType == "Adolescent"){
+			
+			patientBPHigh = 120;
+			patientBPLow = 110;
+			patientPulseHigh = 105;
+			patientPulseLow = 55;
+			patientTempHigh = 100;
+			patientTempLow = 97;
+			patientRespRateHigh = 20;
+			patientRespRateLow = 10;
+		}
 	
 		//Time stamp
 		patientHistory[0] = (int) timeStamp.getTime();
@@ -135,7 +167,11 @@ public class Patient implements Runnable {
 	
 	private void writeHistory(){
 		for(int x = 0; x <= 5; x++){
-		System.out.println(patientHistory[x]);
+			if(x < 5){
+				System.out.print(patientHistory[x] + ",");
+			}else{
+				System.out.println(patientHistory[x]);
+			}
 		}
 	}
 
@@ -154,7 +190,6 @@ public class Patient implements Runnable {
 	}
 	
 	public static void main(String args[]) {
-		(new Thread(new Patient("Zach Huenink", "001", "5/17/1991", "7/17/1991", 10000, 150, 100, 98, 60,
-				170, 90, 10, 0))).start();
+		(new Thread(new Patient("Zach Huenink", "001", "5/17/1991", "7/17/1991", "Adult", 10000))).start();
 	}
 }
