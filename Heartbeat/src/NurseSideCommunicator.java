@@ -53,7 +53,7 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 		
 		try { 
 			
-			bedSide.getPatientTrendInfo(patientID);
+			bedSide.getPatientTrendInfo();
 			
 		} catch(Exception excep) { 
 			System.out.println("Warning! Found an exception trying to fetch patient trend data"); 
