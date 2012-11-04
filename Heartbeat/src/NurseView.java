@@ -21,6 +21,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.LineBorder;
 
 
 public class NurseView {
@@ -146,27 +147,40 @@ public class NurseView {
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JTextPane txtpnPatientName = new JTextPane();
+		txtpnPatientName.setEditable(false);
 		txtpnPatientName.setText("Patient Name");
 		txtpnPatientName.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel_1.add(txtpnPatientName);
 		
 		JTextPane txtpnPatientId = new JTextPane();
+		txtpnPatientId.setEditable(false);
 		txtpnPatientId.setText("Patient ID");
 		txtpnPatientId.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel_1.add(txtpnPatientId);
 		
-		JSeparator separator_1 = new JSeparator();
-		panel_1.add(separator_1);
+		JTextPane txtpnAdmitDate = new JTextPane();
+		txtpnAdmitDate.setEditable(false);
+		txtpnAdmitDate.setBorder(new LineBorder(new Color(0, 0, 0)));
+		txtpnAdmitDate.setText("Admit Date:");
+		panel_1.add(txtpnAdmitDate);
+		
+		JTextPane textPane_4 = new JTextPane();
+		textPane_4.setEditable(false);
+		textPane_4.setBorder(new LineBorder(new Color(0, 0, 0)));
+		textPane_4.setText("11/30/2012");
+		panel_1.add(textPane_4);
 		
 		JPanel panel_2 = new JPanel();
 		panel.add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JTextPane txtpnNibp = new JTextPane();
+		txtpnNibp.setEditable(false);
 		txtpnNibp.setText("NIBP:");
 		panel_2.add(txtpnNibp);
 		
 		JTextPane textPane = new JTextPane();
+		textPane.setEditable(false);
 		textPane.setText("120/80");
 		panel_2.add(textPane);
 		
@@ -176,10 +190,12 @@ public class NurseView {
 		panel_2.add(radioButton);
 		
 		JTextPane txtpnPulse = new JTextPane();
+		txtpnPulse.setEditable(false);
 		txtpnPulse.setText("Pulse:");
 		panel_2.add(txtpnPulse);
 		
 		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setEditable(false);
 		textPane_1.setText("60");
 		panel_2.add(textPane_1);
 		
@@ -189,10 +205,12 @@ public class NurseView {
 		panel_2.add(radioButton_1);
 		
 		JTextPane txtpnTemp = new JTextPane();
+		txtpnTemp.setEditable(false);
 		txtpnTemp.setText("Temp:");
 		panel_2.add(txtpnTemp);
 		
 		JTextPane textPane_2 = new JTextPane();
+		textPane_2.setEditable(false);
 		textPane_2.setText("98.6");
 		panel_2.add(textPane_2);
 		
@@ -201,7 +219,23 @@ public class NurseView {
 		radioButton_2.setSelected(false);
 		panel_2.add(radioButton_2);
 		
+		JTextPane txtpnRespiratoryRate = new JTextPane();
+		txtpnRespiratoryRate.setEditable(false);
+		txtpnRespiratoryRate.setText("Respiratory rate:");
+		panel_2.add(txtpnRespiratoryRate);
+		
+		JTextPane textPane_3 = new JTextPane();
+		textPane_3.setEditable(false);
+		textPane_3.setText("30");
+		panel_2.add(textPane_3);
+		
+		JRadioButton radioButton_3 = new JRadioButton("");
+		radioButton_3.setEnabled(false);
+		radioButton_3.setSelected(false);
+		panel_2.add(radioButton_3);
+		
 		JTextPane txtpnAlarm = new JTextPane();
+		txtpnAlarm.setEditable(false);
 		txtpnAlarm.setText("Alarm:");
 		panel_2.add(txtpnAlarm);
 		
