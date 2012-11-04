@@ -34,6 +34,15 @@ public class Patient implements Runnable {
 	 * @param patientId - ID of Patient
 	 * @param patientAdmitDate - Admit date of patient 
 	 * @param patientDischargeDate - Discharge date of patient 
+	 * @param interval - Designated interval for generating vital signs
+	 * @param patientBPHigh - High number for blood pressure range
+	 * @param patientBPLow - Low number for blood pressure range
+	 * @param patientTempHigh - High number for temperature range
+	 * @param patientTempLow - Low number for temperature range
+	 * @param patientPulseHigh - High number for pulse range
+	 * @param patientPulseLow - Low number for pulse range
+	 * @param patientRespRateHigh - High number for respiratory rate range
+	 * @param patientRespRateLow - Low number for respiratory rate range
 	 */
 	public Patient(String patientName, String patientId, String patientAdmitDate, String patientDischargeDate
 			, Integer interval, Integer patientBPHigh, Integer patientBPLow, Integer patientTempHigh, Integer patientTempLow, 
