@@ -53,11 +53,28 @@ public class BedInterface {
 	}
 	
 	/**
-	 * Methos which simply acknoledges an alarm. 
+	 * Method which simply acknowledges an alarm. 
 	 */
-	public void alarmAcknoledged() { 
+	public void alarmAcknowledged() { 
 		
-	
 	}
 	
+	/**
+	 * Main Method for the bed side system 
+	 */
+	public static void main(String[] args) { 
+		
+		BedInterface bedInterface = new BedInterface(); 
+		BedSideRMIImpl bedRMI = new BedSideRMIImpl(); 
+		BedView bedView = new BedView(); 
+		
+		//Start RMI service for Bed Side.
+		try { 
+			bedRMI.startBedSideRMI();
+		} catch (Exception excep) { 
+			System.out.println("Warning! Exception Found! Could not start RMI service on Bed Side");
+			excep.printStackTrace();
+		}
+		
+	}
 }
