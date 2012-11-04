@@ -115,11 +115,28 @@ public class Patient implements Runnable {
 		writeHistory();
 	}
 	
+	public void generateAlarm(String alarmType){
+		if(alarmType == "Yellow"){
+			patientHistory[5] = 1;
+		}else if(alarmType == "Red"){
+			patientHistory[5] = 2;
+		}else if(alarmType == "None"){
+			patientHistory[5] = 0;
+		}
+	}
+	
+	public void acknowledgeAlarm(String alarm){
+		if(alarm == "Yes"){
+			patientHistory[6] = 1;
+		}else if(alarm == "No"){
+			patientHistory[6] = 0;
+		}
+	}
+	
 	private void writeHistory(){
 		for(int x = 0; x <= 5; x++){
 		System.out.println(patientHistory[x]);
 		}
-		System.out.println("--------------------------------------------");
 	}
 
 	@Override
