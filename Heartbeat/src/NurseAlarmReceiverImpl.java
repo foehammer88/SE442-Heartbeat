@@ -5,7 +5,7 @@ import java.rmi.RemoteException;
 
 public class NurseAlarmReceiverImpl implements NurseAlarmReceiver{
 	
-	private static final String rmiRegistryName = "Nurse-Alarm-Receiver";
+	private String rmiRegistryName = "Nurse-Alarm-Receiver";
 	
 	public void alarmRaised(String alarm, String patientID) throws RemoteException{ 
 		
@@ -19,7 +19,7 @@ public class NurseAlarmReceiverImpl implements NurseAlarmReceiver{
 	}
 	
 	public void unBindToRegistry() throws RemoteException, MalformedURLException, NotBoundException { 
-		System.out.println("Unbinding nurse alarm server from registry");
+		System.out.println("Unbinding nurse alarm server from RMI registry");
 		Naming.unbind(rmiRegistryName);
 	}
 }
