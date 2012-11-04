@@ -1,3 +1,4 @@
+import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -17,9 +18,9 @@ public class NurseStation {
 	/**
 	 * Nurse Station Constructor.
 	 */
-	public NurseStation() { 
+	public NurseStation(NurseSideCommunicator communicator) { 
 		try  { 
-			communicator = new NurseSideCommunicator(); 
+			this.communicator = communicator;
 		} catch(Exception excep) { 
 			System.out.println("Warning! Found an exception"); 
 			excep.printStackTrace();
@@ -84,5 +85,31 @@ public class NurseStation {
 	 */
 	public void acknowledgeAlaram() { 
 		
+	}
+	
+	/**
+	 * Main Method for Nurse System 
+	 * @param args
+	 * @throws RemoteException 
+	 */
+	public static void main(String[] args) { 
+		
+		try { 
+			NurseSideCommunicator nurseComm = new NurseSideCommunicator();
+			NurseStation nurseStation = new NurseStation(nurseComm); 
+			NurseView nurseUI = new NurseView();
+			NurseAlarmReceiverImpl nurseAlarmReceiver = new NurseAlarmReceiverImpl(); 
+			
+			//Start Nurse Side Alarm RMI Service
+			nurseAlarmReceiver.bindToRegistry();
+			
+			//Show Nurse UI 
+			nurseUI.main(null);
+			
+		} catch (Exception excep) { 
+			System.out.println("Warning! Found an Exception in starting Nurse System");
+			excep.printStackTrace();
+		}
+			
 	}
 }

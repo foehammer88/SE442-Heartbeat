@@ -34,14 +34,14 @@ public class BedSideRMIImpl implements BedSideRMI{
 		
 	}
 	
-	private void startBedSideRMI() throws RemoteException, MalformedURLException { 
+	public void startBedSideRMI() throws RemoteException, MalformedURLException { 
 		
 		System.out.println("Binding bed side to RMI registry...");
 		BedSideRMIImpl bedSideRMI = new BedSideRMIImpl(); 
 		Naming.rebind(rmiRegistryName, bedSideRMI);
 	}
 	
-	private void stopBedSideRMI() throws RemoteException, MalformedURLException, NotBoundException { 
+	public void stopBedSideRMI() throws RemoteException, MalformedURLException, NotBoundException { 
 		
 		System.out.println("Unbinding bed side from RMI registry...");
 		Naming.unbind(rmiRegistryName);
