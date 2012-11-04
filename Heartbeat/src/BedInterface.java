@@ -18,4 +18,46 @@ public class BedInterface {
 		
 	}
 	
+	/**
+	 * Method to admit and register patient to bed side. 
+	 * @param patientName
+	 * @param patientID
+	 * @param admitDate
+	 */
+	public void registerPatient(String patientName, String patientID, String admitDate) { 
+		
+		//Create a new patient
+		patient = new Patient(patientName, patientID, admitDate, "", 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	}
+	
+	/**
+	 * Method to discharge patient from bed side. 
+	 * @param patientID
+	 * @param dischargeDate
+	 */
+	public void dischargePatient(String patientID, String dischargeDate) { 
+		
+		//Destroy patient.
+		patient = null; 
+		
+		//But write discharge date to log file. 
+		
+	}
+	
+	/**
+	 * Method to get patient trend data. 
+	 */
+	public void getPatientTrendDate() { 
+		
+		patient.getPatientTrendData();
+	}
+	
+	/**
+	 * Methos which simply acknoledges an alarm. 
+	 */
+	public void alarmAcknoledged() { 
+		
+	
+	}
+	
 }
