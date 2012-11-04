@@ -22,7 +22,9 @@ public class GraphPanel extends JPanel{
 
 	public void paintComponent(Graphics g){
 		setGraph(g);
-		//drawGraph(g);
+		if(dataPoints != null){
+			drawGraph(g);
+		}
 	}
 
 	private void drawGraph(Graphics g) {
@@ -36,23 +38,26 @@ public class GraphPanel extends JPanel{
 		int y, yPast = 0, yCoord;
 		boolean firstRun = true;
 		
-		for(Integer point : dataPoints){			
+		for(Integer point : dataPoints){
 			if(firstRun){
-				y = point.intValue() / getMax() * 280;
+				y = (int) (((double)point.intValue() / (double)getMax()) * 280);
 				yCoord = yOffset - y;
 				xCoord = xOffset + x;
+				g.drawOval(xCoord, yCoord, 3, 3);
 				yPast = yCoord;
 				xPast = xCoord;
-				xCoord += dx;
+				x += dx;
 				firstRun = false;
 			} else{
-				y = point.intValue() / getMax() * 280;
+				y = (int) (((double)point.intValue() / (double)getMax()) * 280);
 				yCoord = yOffset - y;
 				xCoord = xOffset + x;
+				//System.out.println("("+xPast+","+yPast+","+xCoord+","+yCoord+")");
 				g.drawLine(xPast,yPast,xCoord,yCoord);
+				g.drawOval(xCoord, yCoord, 3, 3);
 				yPast = yCoord;
 				xPast = xCoord;
-				xCoord += dx;
+				x += dx;
 			}
 			
 		}

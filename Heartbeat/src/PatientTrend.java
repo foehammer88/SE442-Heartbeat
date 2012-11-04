@@ -20,6 +20,9 @@ import javax.swing.JList;
 import java.awt.Dimension;
 import javax.swing.JTextPane;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Random;
+
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
@@ -159,26 +162,43 @@ public class PatientTrend {
 		frmPatientTrend.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		GraphPanel gPanelSystolic = new GraphPanel();
+		ArrayList<Integer> dataBP = new ArrayList<Integer>();
+		Random rand = new Random();
+		for(int i = 0; i < 10; i++){
+			dataBP.add(rand.nextInt(200 - 60 + 1) + 60);
+		}
+		GraphPanel gPanelSystolic = new GraphPanel(dataBP, "BP");
 		gPanelSystolic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		gPanelSystolic.setBackground(Color.WHITE);
 		JLabel lblSystolic = new JLabel("Systolic Blood Pressure");
 		gPanelSystolic.add(lblSystolic);
 		panel_1.add(gPanelSystolic);
 		
-		GraphPanel gPanelHR = new GraphPanel();
+		ArrayList<Integer> dataHR = new ArrayList<Integer>();
+		for(int i = 0; i < 10; i++){
+			dataHR.add(rand.nextInt(200 - 0 + 1) + 0);
+		}
+		GraphPanel gPanelHR = new GraphPanel(dataHR, "HR");
 		gPanelHR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblHR = new JLabel("Heart Rate");
 		gPanelHR.add(lblHR);
 		panel_1.add(gPanelHR);
 		
-		GraphPanel gPanelTemp = new GraphPanel();
+		ArrayList<Integer> dataTemp = new ArrayList<Integer>();
+		for(int i = 0; i < 10; i++){
+			dataTemp.add(rand.nextInt(120 - 50 + 1) + 50);
+		}
+		GraphPanel gPanelTemp = new GraphPanel(dataTemp, "Temp");
 		gPanelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblTemp = new JLabel("Temperature");
 		gPanelTemp.add(lblTemp);
 		panel_1.add(gPanelTemp);
 		
-		GraphPanel gPanelRR= new GraphPanel();
+		ArrayList<Integer> dataRR = new ArrayList<Integer>();
+		for(int i = 0; i < 10; i++){
+			dataRR.add(rand.nextInt(150 - 0 + 1) + 0);
+		}
+		GraphPanel gPanelRR= new GraphPanel(dataRR, "RR");
 		gPanelRR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblRR = new JLabel("Respiratory Rate");
 		gPanelRR.add(lblRR);
