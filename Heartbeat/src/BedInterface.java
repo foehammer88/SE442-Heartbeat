@@ -27,7 +27,7 @@ public class BedInterface {
 	public void registerPatient(String patientName, String patientID, String admitDate) { 
 		
 		//Create a new patient
-		patient = new Patient(patientName, patientID, admitDate, "", 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		patient = new Patient(patientName, patientID, admitDate, "","", null);
 	}
 	
 	/**
