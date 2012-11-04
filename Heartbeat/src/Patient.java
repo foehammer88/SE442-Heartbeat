@@ -23,9 +23,9 @@ public class Patient implements Runnable {
 	private Integer patientRespRate;
 	private Integer patientRespRateHigh;
 	private Integer patientRespRateLow;
-	private Date timeStamp;
+	private Date timeStamp = new Date();
 	private Integer interval;
-	private String[] patientHistory = new String[6];
+	private Integer[] patientHistory = new Integer[7];
 	private Random rand = new Random();
 	
 	/**
@@ -90,29 +90,27 @@ public class Patient implements Runnable {
 	private void generateVitalSigns(){
 	
 		//Time stamp
-		
-		patientHistory[0] = "2001";
-				//new Timestamp(timeStamp.getTime()).toString();
+		patientHistory[0] = (int) timeStamp.getTime();
 		
 		//Blood Pressure
 		int randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
 		patientBloodPressure = randomNum;
-		patientHistory[1] = patientBloodPressure.toString();
+		patientHistory[1] = patientBloodPressure;
 		
 		//Pulse
 		randomNum = rand.nextInt(patientPulseHigh - patientPulseLow + 1) + patientPulseLow;
 		patientPulse = randomNum;
-		patientHistory[2] = patientPulse.toString();
+		patientHistory[2] = patientPulse;
 		
 		//Temperature
 		randomNum = rand.nextInt(patientTempHigh - patientTempLow + 1) + patientTempLow;
 		patientTemp = randomNum;
-		patientHistory[3] = patientTemp.toString();
+		patientHistory[3] = patientTemp;
 		
 		//Respiratory Rate
 		randomNum = rand.nextInt(patientRespRateHigh - patientRespRateLow + 1) + patientRespRateLow;
 		patientRespRate = randomNum;
-		patientHistory[4] = patientRespRate.toString();
+		patientHistory[4] = patientRespRate;
 		
 		writeHistory();
 	}
