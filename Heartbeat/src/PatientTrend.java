@@ -73,7 +73,7 @@ public class PatientTrend {
 		listModel = new DefaultListModel();
         listModel.addElement("John Doe");
         listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
+        listModel.addElement("Patrick Ganson");
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -164,13 +164,14 @@ public class PatientTrend {
 		
 		ArrayList<Integer> dataBP = new ArrayList<Integer>();
 		Random rand = new Random();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 100; i++){
 			dataBP.add(rand.nextInt(200 - 60 + 1) + 60);
 		}
 		GraphPanel gPanelSystolic = new GraphPanel(dataBP, "BP");
 		gPanelSystolic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		gPanelSystolic.setBackground(Color.WHITE);
 		JLabel lblSystolic = new JLabel("Systolic Blood Pressure");
+		lblSystolic.setForeground(Color.WHITE);
 		gPanelSystolic.add(lblSystolic);
 		panel_1.add(gPanelSystolic);
 		
@@ -181,6 +182,7 @@ public class PatientTrend {
 		GraphPanel gPanelHR = new GraphPanel(dataHR, "HR");
 		gPanelHR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblHR = new JLabel("Heart Rate");
+		lblHR.setForeground(Color.WHITE);
 		gPanelHR.add(lblHR);
 		panel_1.add(gPanelHR);
 		
@@ -191,6 +193,7 @@ public class PatientTrend {
 		GraphPanel gPanelTemp = new GraphPanel(dataTemp, "Temp");
 		gPanelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblTemp = new JLabel("Temperature");
+		lblTemp.setForeground(Color.WHITE);
 		gPanelTemp.add(lblTemp);
 		panel_1.add(gPanelTemp);
 		
@@ -201,6 +204,7 @@ public class PatientTrend {
 		GraphPanel gPanelRR= new GraphPanel(dataRR, "RR");
 		gPanelRR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblRR = new JLabel("Respiratory Rate");
+		lblRR.setForeground(Color.WHITE);
 		gPanelRR.add(lblRR);
 		panel_1.add(gPanelRR);
 	}

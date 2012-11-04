@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+
 public class GraphPanel extends JPanel{
 
 	private ArrayList<Integer> dataPoints;
@@ -37,13 +40,30 @@ public class GraphPanel extends JPanel{
 		int x = 0, xPast = 0, xCoord = 0;
 		int y, yPast = 0, yCoord;
 		boolean firstRun = true;
+		Graphics2D g2D = (Graphics2D)g;
+		// Create a rotation transformation for the font.
+		AffineTransform fontAT = new AffineTransform();
+		// get the current font
+		Font theFont = g2D.getFont();
+		// Derive a new font using a rotatation transform
+		fontAT.rotate(270 * java.lang.Math.PI/180);
+		Font theDerivedFont = theFont.deriveFont(fontAT);
+		// set the derived font in the Graphics2D context
+		g2D.setFont(theDerivedFont);
+
+		// Render a string using the derived font
+		g2D.drawString(getYAxis(), 15, 200);
+
+		// put the original font back
+		g2D.setFont(theFont);
+		g.drawString("time", 225, 332);
 		
 		for(Integer point : dataPoints){
 			if(firstRun){
 				y = (int) (((double)point.intValue() / (double)getMax()) * 280);
 				yCoord = yOffset - y;
 				xCoord = xOffset + x;
-				g.drawOval(xCoord, yCoord, 3, 3);
+				g.drawOval(xCoord-2, yCoord-2, 4, 4);
 				yPast = yCoord;
 				xPast = xCoord;
 				x += dx;
@@ -54,7 +74,7 @@ public class GraphPanel extends JPanel{
 				xCoord = xOffset + x;
 				//System.out.println("("+xPast+","+yPast+","+xCoord+","+yCoord+")");
 				g.drawLine(xPast,yPast,xCoord,yCoord);
-				g.drawOval(xCoord, yCoord, 3, 3);
+				g.drawOval(xCoord-2, yCoord-2, 4, 4);
 				yPast = yCoord;
 				xPast = xCoord;
 				x += dx;
@@ -64,9 +84,9 @@ public class GraphPanel extends JPanel{
 	}
 
 	private void setGraph(Graphics g){
-		g.setColor(Color.WHITE);
+		//g.setColor(Color.WHITE);
 		g.fillRect(0, 0, 450, 450);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.drawLine(25,40,25,320);
 		g.drawLine(25,320,425,320);		
 	}
@@ -83,6 +103,17 @@ public class GraphPanel extends JPanel{
 		}
 	}
 	
+	private String getYAxis(){
+		if(graphType.equals("BP")){
+			return "mmHg";
+		}else if(graphType.equals("HR")){
+			return "bpm";
+		}else if(graphType.equals("Temp")){
+			return "F";
+		}else{
+			return "bpm";
+		}
+	}
 	public static void main(String arg[]){
 		JFrame frame = new JFrame("BasicPanel");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
