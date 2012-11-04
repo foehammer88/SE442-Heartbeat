@@ -19,11 +19,15 @@ import javax.swing.JTextPane;
 import java.awt.GridLayout;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class NurseView {
 
 	private JFrame frmNurseMonitor;
+	private JFrame frmPatientTrend;
+	private PatientTrend winPatientTrend;
 
 	/**
 	 * Launch the application.
@@ -118,6 +122,18 @@ public class NurseView {
 		JMenuItem mntmDeletePatient = new JMenuItem("Delete Patient");
 		mnTools.add(mntmDeletePatient);
 		
+		JSeparator separator_2 = new JSeparator();
+		mnTools.add(separator_2);
+		
+		JMenuItem mntmDisplayHistory = new JMenuItem("Display History");
+		mntmDisplayHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Clicked");
+				createTrendWindow();
+			}
+		});
+		mnTools.add(mntmDisplayHistory);
+		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmNurseMonitor.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
@@ -197,4 +213,9 @@ public class NurseView {
 		panel_2.add(btnResetAlarm);
 	}
 
+	public void createTrendWindow(){
+		System.out.println("Creating Trend Window");
+		winPatientTrend = new PatientTrend();
+	}
+	
 }
