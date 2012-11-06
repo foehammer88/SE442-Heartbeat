@@ -2,10 +2,19 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class NurseAlarmReceiverImpl implements NurseAlarmReceiver{
+public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements NurseAlarmReceiver{
 	
 	private String rmiRegistryName = "Nurse-Alarm-Receiver";
+	
+	/**
+	 * Constructor
+	 * @throws RemoteException
+	 */
+	public NurseAlarmReceiverImpl() throws RemoteException { 
+		
+	}
 	
 	public void alarmRaised(String alarm, String patientID) throws RemoteException{ 
 		
