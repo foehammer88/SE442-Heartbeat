@@ -2,15 +2,16 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 
-public class BedSideRMIImpl implements BedSideRMI{
+public class BedSideRMIImpl extends UnicastRemoteObject implements BedSideRMI{
 
 	private String nurseRegistryID;
 	private String rmiRegistryName = "Bed-Side-RMI";
 	private BedInterface bedInterface;
 	
-	public BedSideRMIImpl() { 
+	public BedSideRMIImpl() throws RemoteException{ 
 		
 		bedInterface = new BedInterface(); 
 	}
@@ -34,11 +35,11 @@ public class BedSideRMIImpl implements BedSideRMI{
 		
 	}
 	
-	public void startBedSideRMI() throws RemoteException, MalformedURLException { 
+	public synchronized void startBedSideRMI() throws RemoteException, MalformedURLException { 
 		
 		System.out.println("Binding bed side to RMI registry...");
 		BedSideRMIImpl bedSideRMI = new BedSideRMIImpl(); 
-		Naming.rebind(rmiRegistryName, bedSideRMI);
+		Naming.rebind("Bed-Side-RMI", bedSideRMI);
 	}
 	
 	public void stopBedSideRMI() throws RemoteException, MalformedURLException, NotBoundException { 
