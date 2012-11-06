@@ -4,6 +4,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * 
+ * @author ShunMok
+ *
+ */
 public class NurseSideCommunicator extends UnicastRemoteObject{
 
 	private String nurseRmiRegistryName = "Nurse-Alarm-Receiver";
@@ -26,16 +31,21 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 		bedSide = (BedSideRMI)rmiRegistry.lookup(bedSideRMI);
 	}
 	
-	public void registerPatientToBedSide(String patientID, String patientName, String admitDate) { 
+	public String registerPatientToBedSide(String patientID, String patientName, String admitDate) { 
+		
+		String message = "";
 		
 		try { 
 			
 			connectoBedSide();
-			bedSide.registerPatientToBedSide(patientName, patientID, nurseRmiRegistryName, admitDate);
+			System.out.println("Registering Patient to BedSide");
+			message = bedSide.registerPatientToBedSide(patientName, patientID, nurseRmiRegistryName, admitDate);
+			return message;
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an exception when trying to register patient to bedside!");
 			excep.printStackTrace();
 		}
+		return message;
 		
 	}
 	
