@@ -64,15 +64,16 @@ public class BedInterface{
 	 */
 	public static void main(String[] args) { 
 		
-		BedInterface bedInterface = new BedInterface();
 		BedSideRMIImpl bedRMI;
+		BedInterface bedInterface = new BedInterface();
 		BedView bedView = new BedView(); ;
+		Alarm alarm = new Alarm();
 		
 		boolean rmiStarted = false ; 
 		
 		//Initialize variables and start RMI service for Bed Side.
 		try { 
-			bedRMI = new BedSideRMIImpl(); 
+			bedRMI = new BedSideRMIImpl(bedInterface, alarm); 
 			
 			System.out.println("Starting Bed Side RMI Service.");
 			bedRMI.startBedSideRMI();
