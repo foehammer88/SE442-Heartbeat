@@ -3,10 +3,18 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.LinkedList;
 
+/**
+ * 
+ * @author ShunMok
+ *
+ */
 public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements NurseAlarmReceiver{
 	
 	private String rmiRegistryName = "Nurse-Alarm-Receiver";
+	private LinkedList alarmBuffer = new LinkedList();  
+	private boolean bufferFull; 
 	
 	/**
 	 * Constructor
@@ -18,7 +26,15 @@ public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements Nurse
 	
 	public void alarmRaised(String alarm, String patientID) throws RemoteException{ 
 		
-		System.out.println("Alarm has been raised: " + alarm);
+		//Add to alarm buffer 
+		
+		//If alarm buffer full then notify bed side 
+		
+		
+	}
+	
+	public void notifyBedSide() { 
+		
 	}
 	
 	public void bindToRegistry() throws RemoteException, MalformedURLException { 
