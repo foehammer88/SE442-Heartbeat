@@ -6,7 +6,7 @@
  * @author ZachH
  *
  */
-public class BedInterface {
+public class BedInterface{
 	
 	private Patient patient; 
 	private BedView bedView; 
@@ -64,14 +64,15 @@ public class BedInterface {
 	 */
 	public static void main(String[] args) { 
 		
-		BedInterface bedInterface = new BedInterface(); 
-		BedSideRMIImpl bedRMI = new BedSideRMIImpl(); 
-		BedView bedView = new BedView(); 
+		BedInterface bedInterface = new BedInterface();
+		BedSideRMIImpl bedRMI;
+		BedView bedView = new BedView(); ;
 		
 		boolean rmiStarted = false ; 
 		
-		//Start RMI service for Bed Side.
+		//Initialize variables and start RMI service for Bed Side.
 		try { 
+			bedRMI = new BedSideRMIImpl(); 
 			
 			System.out.println("Starting Bed Side RMI Service.");
 			bedRMI.startBedSideRMI();
