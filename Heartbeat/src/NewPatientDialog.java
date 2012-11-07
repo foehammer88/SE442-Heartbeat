@@ -17,12 +17,18 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 
 public class NewPatientDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField;
+	JComboBox comboBox;
+	private MonitorView view;
+	private String patientName = "";
+	private String patientType = "";
 
 	/**
 	 * Launch the application.
@@ -45,7 +51,8 @@ public class NewPatientDialog extends JDialog {
 			// handle exception
 		}
 		try {
-			NewPatientDialog dialog = new NewPatientDialog();
+			BedView bv = new BedView();
+			NewPatientDialog dialog = new NewPatientDialog(bv);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -55,8 +62,10 @@ public class NewPatientDialog extends JDialog {
 
 	/**
 	 * Create the dialog.
+	 * @param bedview 
 	 */
-	public NewPatientDialog() {
+	public NewPatientDialog(MonitorView v) {
+		view = v;
 		final NewPatientDialog dialog = this;
 		setSize(new Dimension(400, 50));
 		setTitle("Add New Patient");
@@ -96,7 +105,17 @@ public class NewPatientDialog extends JDialog {
 					panel_1.add(label);
 				}
 				{
-					JComboBox comboBox = new JComboBox();
+					comboBox = new JComboBox();
+					comboBox.addItemListener(new ItemListener() {
+				        @Override
+				        public void itemStateChanged(ItemEvent e) {
+				            if (e.getStateChange() == ItemEvent.SELECTED) {
+				                // assume single selection
+				                String type = (String)e.getItemSelectable().getSelectedObjects()[0];
+				                patientType = type;
+				            }
+				        }
+				    });
 					comboBox.addItem("Adult");
 					comboBox.addItem("Adolescent");
 					comboBox.addItem("Child");
@@ -111,6 +130,12 @@ public class NewPatientDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						view.addPatient(textField.getText(), patientType);
+						dialog.setVisible(false);
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -127,5 +152,6 @@ public class NewPatientDialog extends JDialog {
 			}
 		}
 	}
+
 
 }

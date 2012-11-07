@@ -22,12 +22,19 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 
-public class BedView {
+public class BedView extends MonitorView{
 
 	private JFrame frmBedsideMonitor;
 
+	private BedView bedview;
+	BedInterface bedInterface;
 	/**
 	 * Launch the application.
 	 */
@@ -66,6 +73,13 @@ public class BedView {
 	 * Create the application.
 	 */
 	public BedView() {
+		bedview = this;
+		initialize();
+	}
+
+	public BedView(BedInterface bedInter) {
+		bedview = this;
+		bedInterface = bedInter;
 		initialize();
 	}
 
@@ -246,7 +260,7 @@ public class BedView {
 		JMenuItem mntmNewPatient = new JMenuItem("New Patient");
 		mntmNewPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NewPatientDialog newPatient = new NewPatientDialog();
+				NewPatientDialog newPatient = new NewPatientDialog(bedview);
 				newPatient.setVisible(true);
 			}
 		});
@@ -275,6 +289,19 @@ public class BedView {
 		
 		JMenuItem mntmPatientType = new JMenuItem("Patient Type");
 		mnTools.add(mntmPatientType);
+	}
+
+	public void addPatient(String name, String type){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		
+		Random rand = new Random();
+		Integer idInt = rand.nextInt(9999) + 1;
+		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
+		bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
+		
 	}
 
 }

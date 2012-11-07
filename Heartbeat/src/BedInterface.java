@@ -24,10 +24,10 @@ public class BedInterface{
 	 * @param patientID
 	 * @param admitDate
 	 */
-	public void registerPatient(String patientName, String patientID, String admitDate) { 
+	public void registerPatient(String patientName, String patientType, String patientID, String admitDate) { 
 		
 		//Create a new patient
-		patient = new Patient(patientName, patientID, admitDate, "","", null);
+		patient = new Patient(patientName, patientID, admitDate, "", patientType, null);
 	}
 	
 	/**

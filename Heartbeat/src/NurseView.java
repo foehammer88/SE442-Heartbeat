@@ -21,15 +21,22 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
 import javax.swing.border.LineBorder;
 
 
-public class NurseView {
+public class NurseView extends MonitorView{
 
 	private JFrame frmNurseMonitor;
 	private JFrame frmPatientTrend;
 	private PatientTrend winPatientTrend;
 
+	private NurseView nurseView;
 	/**
 	 * Launch the application.
 	 */
@@ -68,6 +75,7 @@ public class NurseView {
 	 * Create the application.
 	 */
 	public NurseView() {
+		nurseView = this;
 		initialize();
 	}
 
@@ -88,6 +96,12 @@ public class NurseView {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmNewPatient = new JMenuItem("New Patient");
+		mntmNewPatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NewPatientDialog newPatient = new NewPatientDialog(nurseView);
+				newPatient.setVisible(true);
+			}
+		});
 		mnFile.add(mntmNewPatient);
 		
 		JMenuItem mntmOpenPatient = new JMenuItem("Open Patient");
@@ -250,6 +264,19 @@ public class NurseView {
 	public void createTrendWindow(){
 		System.out.println("Creating Trend Window");
 		winPatientTrend = new PatientTrend();
+	}
+	
+	public void addPatient(String name, String type){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		
+		Random rand = new Random();
+		Integer idInt = rand.nextInt(9999) + 1;
+		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
+		//bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
+		
 	}
 	
 }
