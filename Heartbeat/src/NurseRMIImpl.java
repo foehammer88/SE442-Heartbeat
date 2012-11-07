@@ -47,6 +47,11 @@ public class NurseRMIImpl extends UnicastRemoteObject implements NurseRMI{
 		nurseStation.alarmRaised(alarmDegree);
 	}
 	
+	public void receivePatientVitals(String bp, String hr, String temp, String rr) throws RemoteException{ 
+		
+		nurseStation.updateVitals(bp, hr, temp, rr);
+	}
+	
 	public void alarmRaised(AlarmPair alarmObject) throws RemoteException{ 
 		
 		if (checkIfAlarmBufferFull()) { 
