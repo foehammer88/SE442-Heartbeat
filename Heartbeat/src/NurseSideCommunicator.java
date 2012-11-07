@@ -70,4 +70,15 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 			excep.printStackTrace();
 		}
 	}
+	
+	public void sendNurseSideBufferInfo(boolean status) { 
+		
+		try { 
+			
+			bedSide.alarmQueueStatus(status);
+		} catch (Exception excep) { 
+			System.out.println("Warning! Found an exception trying to sent nurse side alarm buffer status");
+			excep.printStackTrace();
+		}
+	}
 }
