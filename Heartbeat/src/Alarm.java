@@ -11,6 +11,7 @@ public class Alarm {
     private static final String ns_handle = "Nurse-Alarm-Receiver";
     private static Registry registry;
     private static ArrayList<AlarmPair> buffer = new ArrayList<AlarmPair>();
+    private static boolean nurseAlarmBufferFull = false; 
     /**
      * Initializes this class' reference to the RMI Registry
      * @param host The host name of the machine the registry is located on
@@ -37,9 +38,14 @@ public class Alarm {
     public static boolean tripAlarm(String color, String patientID) throws NotBoundException {
         try {
         	System.out.println("Sending alarm");
-            NurseAlarmReceiver ns = (NurseAlarmReceiver) registry.lookup(ns_handle);
-            AlarmPair p = new AlarmPair(patientID, color);
-            ns.alarmRaised(p);
+        	if (nurseAlarmBufferFull) { 
+        		System.out.println("Nurse Alarm Buffer is full, sending alarm to local buffer...");
+        		bufferAlarm(color, patientID);
+        	} else { 
+        		 NurseAlarmReceiver ns = (NurseAlarmReceiver) registry.lookup(ns_handle);
+                 AlarmPair p = new AlarmPair(patientID, color);
+                 ns.alarmRaised(p);
+        	}
         }catch(RemoteException e) {
             e.printStackTrace();
         }
