@@ -33,6 +33,8 @@ public class Patient implements Runnable {
 	private Integer[] patientHistory = new Integer[7];
 	private Random rand = new Random();
 	
+	private BedInterface bedInterface;
+	
 	/**
 	 * Patient Object Constructor
 	 * @param patientName - Name of Patient
@@ -169,7 +171,12 @@ public class Patient implements Runnable {
 		patientRespRate = randomNum;
 		patientHistory[4] = patientRespRate;
 		
-		
+		//Send patient vital signs 
+		String hr = String.valueOf(patientPulse);
+		String bp = String.valueOf(patientBloodPressure);
+		String temp = String.valueOf(patientTemp);
+		String rr = String.valueOf(patientRespRate);
+		sendPatientData(hr,bp,temp,rr);
 	}
 	
 	public void generateAlarm(String alarmType){
@@ -228,9 +235,17 @@ public class Patient implements Runnable {
 	}
 
 	
-	public void sendPatientData() { 
+	/**
+	 * Send patient vitals data to nurse side and bed side.
+	 */
+	public void sendPatientData(String bp, String hr, String temp, String rr) { 
 		
+		bedInterface.updateVitals(bp, hr, temp, rr);
+	}
+	
+	public void setController(BedInterface bedInterface) { 
 		
+		this.bedInterface = bedInterface;
 	}
 	
 	@Override
