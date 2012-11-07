@@ -98,7 +98,7 @@ public class NurseStation {
 		try { 
 			NurseSideCommunicator nurseComm = new NurseSideCommunicator();
 			NurseStation nurseStation = new NurseStation(nurseComm); 
-			NurseView nurseUI = new NurseView();
+			NurseView nurseUI = new NurseView(nurseStation);
 			NurseAlarmReceiverImpl nurseAlarmReceiver = new NurseAlarmReceiverImpl(nurseStation, nurseComm); 
 			
 			//Start Nurse Side Alarm RMI Service

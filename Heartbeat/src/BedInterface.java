@@ -66,7 +66,7 @@ public class BedInterface{
 		
 		BedSideRMIImpl bedRMI;
 		BedInterface bedInterface = new BedInterface();
-		BedView bedView = new BedView(); ;
+		BedView bedView = new BedView(bedInterface); ;
 		Alarm alarm = new Alarm();
 		
 		boolean rmiStarted = false ; 

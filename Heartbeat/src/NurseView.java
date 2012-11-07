@@ -36,6 +36,7 @@ public class NurseView extends MonitorView{
 	private JFrame frmPatientTrend;
 	private PatientTrend winPatientTrend;
 
+	private NurseStation nurseStation;
 	private NurseView nurseView;
 	/**
 	 * Launch the application.
@@ -76,6 +77,12 @@ public class NurseView extends MonitorView{
 	 */
 	public NurseView() {
 		nurseView = this;
+		initialize();
+	}
+
+	public NurseView(NurseStation ns) {
+		nurseView = this;
+		nurseStation = ns;
 		initialize();
 	}
 
@@ -275,7 +282,7 @@ public class NurseView extends MonitorView{
 		Random rand = new Random();
 		Integer idInt = rand.nextInt(9999) + 1;
 		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
-		//bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
+		nurseStation.admitPatient(idInt.toString(), name, type);
 		
 	}
 	
