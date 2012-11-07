@@ -86,6 +86,21 @@ public class NurseStation {
 	 */
 	public void acknowledgeAlaram() { 
 		
+		try {
+			communicator.acknowledgeAlarm();
+		} catch (RemoteException e) {
+			System.out.println("Warning! Exception found trying to send acknowledge alarm.");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method in which alarm raised will be shown to the nurse user interface.
+	 * @param alarmObject
+	 */
+	public void alarmRaised(String alarmDegree) { 
+		
+		
 	}
 	
 	/**
