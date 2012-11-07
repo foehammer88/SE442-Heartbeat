@@ -69,8 +69,9 @@ public class NurseView extends MonitorView{
 			public void run() {
 				try {
 					NurseSideCommunicator nurseComm = new NurseSideCommunicator();
-					NurseStation ns = new NurseStation(nurseComm); 
-					NurseView window = new NurseView(ns);
+					NurseView window = new NurseView();
+					NurseStation ns = new NurseStation(nurseComm, window);
+					window.startNurseView(ns);
 					window.frmNurseMonitor.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,6 +91,11 @@ public class NurseView extends MonitorView{
 	public NurseView(NurseStation ns) {
 		nurseView = this;
 		nurseStation = ns;
+		initialize();
+	}
+	
+	public void startNurseView(NurseStation nurseStation){
+		this.nurseStation = nurseStation; 
 		initialize();
 	}
 
