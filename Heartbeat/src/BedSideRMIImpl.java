@@ -48,6 +48,7 @@ public class BedSideRMIImpl extends UnicastRemoteObject implements BedSideRMI{
 	public synchronized void alarmQueueStatus(boolean queueFull) throws RemoteException { 
 			
 		//set boolean in alarm true
+		
 	}
 	
 	public synchronized void startBedSideRMI() throws RemoteException, MalformedURLException { 
