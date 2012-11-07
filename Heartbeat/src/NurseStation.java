@@ -42,12 +42,12 @@ public class NurseStation {
 	 * Method to admit patient to a bedside. 
 	 * @param patientID - id of patient. 
 	 */
-	public void admitPatient(String patientID, String patientName) { 
+	public void admitPatient(String patientID, String patientName, String patientType) { 
 		
 		String admitDate = getCurrentTimeDate();
 		
 		try { 
-			String message = communicator.registerPatientToBedSide(patientID, patientName, admitDate);
+			String message = communicator.registerPatientToBedSide(patientID, patientName, admitDate, patientType);
 			System.out.println("Message from bed side: " + message);
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an exception");
@@ -88,13 +88,6 @@ public class NurseStation {
 		
 	}
 	
-	public void testRMI() { 
-		
-		System.out.println("Testing");
-		admitPatient("12", "tester");
-		
-	}
-	
 	/**
 	 * Main Method for Nurse System 
 	 * @param args
@@ -113,9 +106,6 @@ public class NurseStation {
 			
 			//Show Nurse UI 
 			nurseUI.main(null);
-			
-			//Testing 
-			nurseStation.testRMI();
 			
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an Exception in starting Nurse System");
