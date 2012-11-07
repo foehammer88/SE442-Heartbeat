@@ -41,6 +41,8 @@ public class NurseView extends MonitorView{
 	JTextPane textPaneTemp;
 	JTextPane textPaneRR;
 	
+	JPanel panel_AlarmCode;
+	
 	private NurseStation nurseStation;
 	private NurseView nurseView;
 	/**
@@ -84,7 +86,6 @@ public class NurseView extends MonitorView{
 	 */
 	public NurseView() {
 		nurseView = this;
-		initialize();
 	}
 
 	public NurseView(NurseStation ns) {
@@ -93,6 +94,11 @@ public class NurseView extends MonitorView{
 		initialize();
 	}
 
+	public void startNurseView(NurseStation ns){
+		nurseStation = ns;
+		initialize();
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -222,10 +228,10 @@ public class NurseView extends MonitorView{
 		txtpnPulse.setText("Pulse:");
 		panel_2.add(txtpnPulse);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setEditable(false);
-		textPane_1.setText("60");
-		panel_2.add(textPane_1);
+		textPaneHR = new JTextPane();
+		textPaneHR.setEditable(false);
+		textPaneHR.setText("60");
+		panel_2.add(textPaneHR);
 		
 		JRadioButton radioButton_1 = new JRadioButton("");
 		radioButton_1.setEnabled(false);
@@ -237,10 +243,10 @@ public class NurseView extends MonitorView{
 		txtpnTemp.setText("Temp:");
 		panel_2.add(txtpnTemp);
 		
-		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setEditable(false);
-		textPane_2.setText("98.6");
-		panel_2.add(textPane_2);
+		textPaneTemp = new JTextPane();
+		textPaneTemp.setEditable(false);
+		textPaneTemp.setText("98.6");
+		panel_2.add(textPaneTemp);
 		
 		JRadioButton radioButton_2 = new JRadioButton("");
 		radioButton_2.setEnabled(false);
@@ -252,10 +258,10 @@ public class NurseView extends MonitorView{
 		txtpnRespiratoryRate.setText("Respiratory rate:");
 		panel_2.add(txtpnRespiratoryRate);
 		
-		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setEditable(false);
-		textPane_3.setText("30");
-		panel_2.add(textPane_3);
+		textPaneHR = new JTextPane();
+		textPaneHR.setEditable(false);
+		textPaneHR.setText("30");
+		panel_2.add(textPaneHR);
 		
 		JRadioButton radioButton_3 = new JRadioButton("");
 		radioButton_3.setEnabled(false);
@@ -267,7 +273,7 @@ public class NurseView extends MonitorView{
 		txtpnAlarm.setText("Alarm:");
 		panel_2.add(txtpnAlarm);
 		
-		JPanel panel_AlarmCode = new JPanel();
+		panel_AlarmCode = new JPanel();
 		panel_AlarmCode.setBackground(Color.GREEN);
 		panel_2.add(panel_AlarmCode);
 		
@@ -295,9 +301,17 @@ public class NurseView extends MonitorView{
 	
 	public void updateVitals(String bp, String hr, String temp, String rr){
 		textPaneBP.setText(bp);
-		//textPaneHR.setText(hr);
-		//textPaneTemp.setText(temp);
-		//textPaneRR.setText(rr);
+		textPaneHR.setText(hr);
+		textPaneTemp.setText(temp);
+		textPaneRR.setText(rr);
+	}
+	
+	public void setAlarm(String degree){
+		if (degree.equals("Red")){
+			panel_AlarmCode.setBackground(Color.RED);
+		} else if(degree.equals("Yellow")){
+			panel_AlarmCode.setBackground(Color.YELLOW);
+		}
 	}
 	
 }

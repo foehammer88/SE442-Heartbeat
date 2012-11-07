@@ -41,6 +41,8 @@ public class BedView extends MonitorView{
 	JTextPane txtpnPatientName;
 	JTextPane txtpnPatientId;
 	
+	JPanel panel_AlarmCode;
+	
 	private BedView bedview;
 	BedInterface bedInterface;
 	/**
@@ -179,7 +181,7 @@ public class BedView extends MonitorView{
 		txtpnAlarm.setText("Alarm:");
 		panel_2.add(txtpnAlarm);
 		
-		JPanel panel_AlarmCode = new JPanel();
+		panel_AlarmCode = new JPanel();
 		panel_AlarmCode.setBackground(Color.GREEN);
 		panel_2.add(panel_AlarmCode);
 		
@@ -331,4 +333,11 @@ public class BedView extends MonitorView{
 		textPaneRR.setText(rr);
 	}
 
+	public void setAlarm(String degree){
+		if (degree.equals("Red")){
+			panel_AlarmCode.setBackground(Color.RED);
+		} else if(degree.equals("Yellow")){
+			panel_AlarmCode.setBackground(Color.YELLOW);
+		}
+	}
 }
