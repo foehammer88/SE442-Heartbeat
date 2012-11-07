@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 import java.rmi.registry.*;
-import java.rmi.AccessException;
 import java.rmi.NotBoundException;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject; 
 
 /**
  * @author Patrick
@@ -39,17 +36,18 @@ public class Alarm {
      */
     public static boolean tripAlarm(String color, String patientID) throws NotBoundException {
         try {
+        	System.out.println("Sending alarm");
             NurseAlarmReceiver ns = (NurseAlarmReceiver) registry.lookup(ns_handle);
             AlarmPair p = new AlarmPair(patientID, color);
             ns.alarmRaised(p);
         }catch(RemoteException e) {
-            return false;
+            e.printStackTrace();
         }
         
         return true;
     }
     
-    public static void bufferAlarm(String color, String patientID) {
+    public static void bufferAlarm(String color, String patientID) throws RemoteException {
         AlarmPair p = new AlarmPair(patientID, color);
         buffer.add(p);
     }
