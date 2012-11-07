@@ -16,14 +16,18 @@ public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements Nurse
 	private String rmiRegistryName = "Nurse-Alarm-Receiver";
 	private ArrayList<AlarmPair> localAlarmBuffer; 
 	private boolean bufferFull; 
+	private NurseSideCommunicator communicator; 
+	private NurseStation nurseStation; 
 	
 	/**
 	 * Constructor
 	 * @throws RemoteException
 	 */
-	public NurseAlarmReceiverImpl(NurseStation nurseStation) throws RemoteException { 
+	public NurseAlarmReceiverImpl(NurseStation nurseStation, NurseSideCommunicator communicator) throws RemoteException { 
 		
 		localAlarmBuffer = new ArrayList<AlarmPair>();
+		this.nurseStation = nurseStation; 
+		this.communicator = communicator; 
 	}
 	
 	private boolean checkIfAlarmBufferFull() { 
@@ -51,6 +55,7 @@ public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements Nurse
 	 */
 	public void notifyBedSideOfAlarmBuffer(boolean status) { 
 		
+		communicator.sendNurseSideBufferInfo(status);
 	}
 	
 	public void bindToRegistry() throws RemoteException, MalformedURLException { 
