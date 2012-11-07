@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
@@ -47,6 +50,8 @@ public class Patient implements Runnable {
 		this.patientDischargeDate = patientDischargeDate;
 		this.patientType = patientType;
 		this.interval = interval;
+		patientHistory[5] = 0;
+		patientHistory[6] = 0;
 		
 	}
 	
@@ -144,7 +149,6 @@ public class Patient implements Runnable {
 		patientRespRate = randomNum;
 		patientHistory[4] = patientRespRate;
 		
-		writeHistory();
 	}
 	
 	public void generateAlarm(String alarmType){
@@ -165,14 +169,29 @@ public class Patient implements Runnable {
 		}
 	}
 	
+	public Integer getCurrentStats(Integer stat){
+		return patientHistory[stat];
+	}
+	
 	private void writeHistory(){
-		for(int x = 0; x <= 5; x++){
-			if(x < 5){
-				System.out.print(patientHistory[x] + ",");
-			}else{
-				System.out.println(patientHistory[x]);
+		try {
+			FileWriter fWriter = new FileWriter(patientID + ".txt", true);
+			BufferedWriter out = new BufferedWriter(fWriter);
+			
+			for(int x = 0; x < patientHistory.length; x++){
+					out.write(patientHistory[x] + " ");
 			}
+			out.newLine();
+			out.close();
+			fWriter.close();
+			System.out.println("tick");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		
 	}
 
 	@Override
@@ -181,6 +200,7 @@ public class Patient implements Runnable {
 		while(true){
 		try {
 				generateVitalSigns();
+				writeHistory();
 				Thread.sleep(interval);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
