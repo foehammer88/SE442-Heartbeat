@@ -60,7 +60,8 @@ public class BedView extends MonitorView{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BedView window = new BedView();
+					BedInterface bi = new BedInterface();
+					BedView window = new BedView(bi);
 					window.frmBedsideMonitor.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

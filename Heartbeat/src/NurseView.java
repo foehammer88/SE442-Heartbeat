@@ -63,7 +63,9 @@ public class NurseView extends MonitorView{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NurseView window = new NurseView();
+					NurseSideCommunicator nurseComm = new NurseSideCommunicator();
+					NurseStation ns = new NurseStation(nurseComm); 
+					NurseView window = new NurseView(ns);
 					window.frmNurseMonitor.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
