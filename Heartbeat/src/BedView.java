@@ -33,6 +33,11 @@ public class BedView extends MonitorView{
 
 	private JFrame frmBedsideMonitor;
 
+	JTextPane textPaneBP;
+	JTextPane textPaneHR;
+	JTextPane textPaneTemp;
+	JTextPane textPaneRR;
+	
 	private BedView bedview;
 	BedInterface bedInterface;
 	/**
@@ -126,40 +131,40 @@ public class BedView extends MonitorView{
 		txtpnNibp.setText("NIBP:");
 		panel_2.add(txtpnNibp);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setText("120/80");
-		panel_2.add(textPane);
+		textPaneBP = new JTextPane();
+		textPaneBP.setEditable(false);
+		textPaneBP.setText("120/80");
+		panel_2.add(textPaneBP);
 		
 		JTextPane txtpnPulse = new JTextPane();
 		txtpnPulse.setEditable(false);
 		txtpnPulse.setText("Pulse:");
 		panel_2.add(txtpnPulse);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setEditable(false);
-		textPane_1.setText("60");
-		panel_2.add(textPane_1);
+		textPaneHR = new JTextPane();
+		textPaneHR.setEditable(false);
+		textPaneHR.setText("60");
+		panel_2.add(textPaneHR);
 		
 		JTextPane txtpnTemp = new JTextPane();
 		txtpnTemp.setEditable(false);
 		txtpnTemp.setText("Temp:");
 		panel_2.add(txtpnTemp);
 		
-		JTextPane textPane_2 = new JTextPane();
-		textPane_2.setEditable(false);
-		textPane_2.setText("98.6");
-		panel_2.add(textPane_2);
+		textPaneTemp = new JTextPane();
+		textPaneTemp.setEditable(false);
+		textPaneTemp.setText("98.6");
+		panel_2.add(textPaneTemp);
 		
 		JTextPane txtpnRespiratoryRate = new JTextPane();
 		txtpnRespiratoryRate.setEditable(false);
 		txtpnRespiratoryRate.setText("Respiratory Rate:");
 		panel_2.add(txtpnRespiratoryRate);
 		
-		JTextPane textPane_3 = new JTextPane();
-		textPane_3.setEditable(false);
-		textPane_3.setText("30");
-		panel_2.add(textPane_3);
+		textPaneRR = new JTextPane();
+		textPaneRR.setEditable(false);
+		textPaneRR.setText("30");
+		panel_2.add(textPaneRR);
 		
 		JTextPane txtpnAlarm = new JTextPane();
 		txtpnAlarm.setEditable(false);
@@ -302,6 +307,14 @@ public class BedView extends MonitorView{
 		Integer idInt = rand.nextInt(9999) + 1;
 		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
 		bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
+		
+	}
+	
+	public void updateVitals(String bp, String hr, String temp, String rr){
+		textPaneBP.setText(bp);
+		textPaneHR.setText(hr);
+		textPaneTemp.setText(temp);
+		textPaneRR.setText(rr);
 		
 	}
 
