@@ -95,11 +95,6 @@ public class NurseView extends MonitorView{
 		initialize();
 	}
 	
-	public void startNurseView(NurseStation nurseStation){
-		this.nurseStation = nurseStation; 
-		initialize();
-	}
-
 	public void startNurseView(NurseStation ns){
 		nurseStation = ns;
 		initialize();
