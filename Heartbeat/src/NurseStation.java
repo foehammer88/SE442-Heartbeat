@@ -106,7 +106,7 @@ public class NurseStation {
 			NurseSideCommunicator nurseComm = new NurseSideCommunicator();
 			NurseStation nurseStation = new NurseStation(nurseComm); 
 			NurseView nurseUI = new NurseView();
-			NurseAlarmReceiverImpl nurseAlarmReceiver = new NurseAlarmReceiverImpl(); 
+			NurseAlarmReceiverImpl nurseAlarmReceiver = new NurseAlarmReceiverImpl(nurseStation); 
 			
 			//Start Nurse Side Alarm RMI Service
 			nurseAlarmReceiver.bindToRegistry();
