@@ -31,7 +31,7 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 		bedSide = (BedSideRMI)rmiRegistry.lookup(bedSideRMI);
 	}
 	
-	public String registerPatientToBedSide(String patientID, String patientName, String admitDate) { 
+	public String registerPatientToBedSide(String patientID, String patientName, String admitDate, String patientType) { 
 		
 		String message = "";
 		
@@ -39,7 +39,7 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 			
 			connectoBedSide();
 			System.out.println("Registering Patient to BedSide");
-			message = bedSide.registerPatientToBedSide(patientName, patientID, nurseRmiRegistryName, admitDate);
+			message = bedSide.registerPatientToBedSide(patientName, patientID, nurseRmiRegistryName, admitDate, patientType);
 			return message;
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an exception when trying to register patient to bedside!");
