@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
@@ -134,28 +135,44 @@ public class Patient implements Runnable {
 		patientBloodPressure = randomNum;
 		patientHistory[1] = patientBloodPressure;
 		
+		
 		//Pulse
 		randomNum = rand.nextInt(patientPulseHigh - patientPulseLow + 1) + patientPulseLow;
 		patientPulse = randomNum;
 		patientHistory[2] = patientPulse;
+		
 		
 		//Temperature
 		randomNum = rand.nextInt(patientTempHigh - patientTempLow + 1) + patientTempLow;
 		patientTemp = randomNum;
 		patientHistory[3] = patientTemp;
 		
+		
 		//Respiratory Rate
 		randomNum = rand.nextInt(patientRespRateHigh - patientRespRateLow + 1) + patientRespRateLow;
 		patientRespRate = randomNum;
 		patientHistory[4] = patientRespRate;
+		
 		
 	}
 	
 	public void generateAlarm(String alarmType){
 		if(alarmType == "Yellow"){
 			patientHistory[5] = 1;
+			try {
+				Alarm.tripAlarm("Yellow", alarmType);
+			} catch (NotBoundException e) {
+				System.out.println("Warning! Found an exception trying to generate alarm.");
+				e.printStackTrace();
+			}
 		}else if(alarmType == "Red"){
 			patientHistory[5] = 2;
+			try {
+				Alarm.tripAlarm("Red", alarmType);
+			} catch (NotBoundException e) {
+				System.out.println("Warning! Found an exception trying to generate alarm.");
+				e.printStackTrace();
+			}
 		}else if(alarmType == "None"){
 			patientHistory[5] = 0;
 		}
