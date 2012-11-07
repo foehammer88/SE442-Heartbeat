@@ -15,7 +15,7 @@ public class BedInterface{
 	 * Constructor
 	 */
 	public BedInterface() { 
-		
+		this.bedView = bedView; 
 	}
 	
 	/**
@@ -57,6 +57,7 @@ public class BedInterface{
 	 */
 	public void alarmAcknowledged() { 
 		
+		patient.acknowledgeAlarm("yes");
 	}
 	
 	/**
