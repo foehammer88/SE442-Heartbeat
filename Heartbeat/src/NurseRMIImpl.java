@@ -11,7 +11,7 @@ import java.util.LinkedList;
  * @author ShunMok
  *
  */
-public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements NurseAlarmReceiver{
+public class NurseRMIImpl extends UnicastRemoteObject implements NurseRMI{
 	
 	private String rmiRegistryName = "Nurse-Alarm-Receiver";
 	private ArrayList<AlarmPair> localAlarmBuffer; 
@@ -23,7 +23,7 @@ public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements Nurse
 	 * Constructor
 	 * @throws RemoteException
 	 */
-	public NurseAlarmReceiverImpl(NurseStation nurseStation, NurseSideCommunicator communicator) throws RemoteException { 
+	public NurseRMIImpl(NurseStation nurseStation, NurseSideCommunicator communicator) throws RemoteException { 
 		
 		localAlarmBuffer = new ArrayList<AlarmPair>();
 		this.nurseStation = nurseStation; 

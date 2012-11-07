@@ -14,13 +14,15 @@ public class NurseStation {
 
 	private NurseSideCommunicator communicator; 
 	private String DATE_FORMAT_NOW = "yyyy-MM-dd HH:mm:ss";
+	private NurseView nurseView; 
 	
 	/**
 	 * Nurse Station Constructor.
 	 */
-	public NurseStation(NurseSideCommunicator communicator) { 
+	public NurseStation(NurseSideCommunicator communicator, NurseView nurseView) { 
 		try  { 
 			this.communicator = communicator;
+			this.nurseView = nurseView;
 		} catch(Exception excep) { 
 			System.out.println("Warning! Found an exception"); 
 			excep.printStackTrace();
@@ -36,6 +38,10 @@ public class NurseStation {
 		dischargeDate = sdf.format(cal.getTime()).toString();
 		
 		return dischargeDate; 
+	}
+	
+	public void updateVitals() { 
+		
 	}
 	
 	/**
@@ -112,9 +118,10 @@ public class NurseStation {
 		
 		try { 
 			NurseSideCommunicator nurseComm = new NurseSideCommunicator();
-			NurseStation nurseStation = new NurseStation(nurseComm); 
-			NurseView nurseUI = new NurseView(nurseStation);
-			NurseAlarmReceiverImpl nurseAlarmReceiver = new NurseAlarmReceiverImpl(nurseStation, nurseComm); 
+			NurseView nurseUI = new NurseView();
+			NurseStation nurseStation = new NurseStation(nurseComm, nurseUI); 
+			nurseUI.startNurseView(nurseStation);
+			NurseRMIImpl nurseAlarmReceiver = new NurseRMIImpl(nurseStation, nurseComm); 
 			
 			//Start Nurse Side Alarm RMI Service
 			nurseAlarmReceiver.bindToRegistry();
