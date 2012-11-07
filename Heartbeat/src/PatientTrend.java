@@ -34,6 +34,11 @@ public class PatientTrend {
 	private JList patientList;
     private DefaultListModel listModel;
     
+    private ArrayList<Integer> dataBP;
+    private ArrayList<Integer> dataHR;
+    private ArrayList<Integer> dataTemp;
+    private ArrayList<Integer> dataRR;
+    
 	/**
 	 * Launch the application.
 	 */
@@ -66,14 +71,36 @@ public class PatientTrend {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public PatientTrend() {
 		listModel = new DefaultListModel();
         listModel.addElement("John Doe");
         listModel.addElement("John Smith");
         listModel.addElement("Patrick Ganson");
+        
+        EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frmPatientTrend.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		initialize();
+	}
+	
+	/**
+	 * Create the application.
+	 */
+	public PatientTrend(ArrayList<Integer> dBP, ArrayList<Integer> dHR, ArrayList<Integer> dTemp,
+			ArrayList<Integer> dRR, DefaultListModel patientList) {
+		listModel = patientList;
+        
+        dataBP = dBP;
+        dataHR = dHR;
+        dataTemp = dTemp;
+        dataRR = dRR;
+        
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
