@@ -130,11 +130,27 @@ public class Patient implements Runnable {
 		//Time stamp
 		patientHistory[0] = (int) timeStamp.getTime();
 		
-		//Blood Pressure
-		int randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
-		patientBloodPressure = randomNum;
-		patientHistory[1] = patientBloodPressure;
-		
+		int randomNum = 0; 
+		if(patientHistory[5] == 1){
+			
+			patientBPHigh = 130;
+			patientBPLow = 121;
+			randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
+			patientBloodPressure = randomNum;
+			patientHistory[1] = patientBloodPressure;
+			
+		}else if(patientHistory[5] == 2){
+			patientBPHigh = 140;
+			patientBPLow = 131;
+			randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
+			patientBloodPressure = randomNum;
+			patientHistory[1] = patientBloodPressure;
+		}else{
+			randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
+			patientBloodPressure = randomNum;
+			patientHistory[1] = patientBloodPressure;
+			
+		}
 		
 		//Pulse
 		randomNum = rand.nextInt(patientPulseHigh - patientPulseLow + 1) + patientPulseLow;
