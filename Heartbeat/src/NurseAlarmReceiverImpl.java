@@ -39,6 +39,14 @@ public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements Nurse
 		}
 	}
 	
+	private void notifyNurseStationAlarmInBuffer(ArrayList<AlarmPair> alarmQueue) { 
+		
+		AlarmPair localAlarmObject = alarmQueue.get(0);
+		String alarmDegree = localAlarmObject.getAlarmType();
+		String patientID = localAlarmObject.getId();
+		nurseStation.alarmRaised(alarmDegree);
+	}
+	
 	public void alarmRaised(AlarmPair alarmObject) throws RemoteException{ 
 		
 		if (checkIfAlarmBufferFull()) { 
@@ -47,7 +55,7 @@ public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements Nurse
 		//Add to alarm buffer 
 		localAlarmBuffer.add(alarmObject);
 		}
-		
+		notifyNurseStationAlarmInBuffer(localAlarmBuffer); 
 	}
 	
 	/**
