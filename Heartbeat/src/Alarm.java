@@ -1,11 +1,10 @@
 import java.util.ArrayList;
-import java.nio.channels.AlreadyBoundException;
 import java.rmi.registry.*;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
+import java.rmi.server.UnicastRemoteObject; 
 
 /**
  * @author Patrick
@@ -44,8 +43,6 @@ public class Alarm {
             AlarmPair p = new AlarmPair(patientID, color);
             ns.alarmRaised(p);
         }catch(RemoteException e) {
-            return false;
-        }catch(AlreadyBoundException e) {
             return false;
         }
         
