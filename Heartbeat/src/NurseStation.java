@@ -40,8 +40,9 @@ public class NurseStation {
 		return dischargeDate; 
 	}
 	
-	public void updateVitals() { 
+	public void updateVitals(String bp, String hr, String temp, String rr) { 
 		
+		nurseView.updateVitals(bp, hr, temp, rr);
 	}
 	
 	/**
