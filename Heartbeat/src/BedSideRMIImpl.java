@@ -28,10 +28,10 @@ public class BedSideRMIImpl extends UnicastRemoteObject implements BedSideRMI{
 		bedInterface.getPatientTrendDate();
 	}
 	
-	public synchronized String registerPatientToBedSide(String patientName, String patientID, String nurseRegistryID, String admitDate) throws RemoteException { 
+	public synchronized String registerPatientToBedSide(String patientName, String patientID, String nurseRegistryID, String admitDate, String patientType) throws RemoteException { 
 		
 		this.nurseRegistryID = nurseRegistryID;
-		bedInterface.registerPatient(patientName, patientID, admitDate);
+		bedInterface.registerPatient(patientName,patientType, patientID, admitDate);
 		return "Patient has been registered to BedSide";
 	}
 	
