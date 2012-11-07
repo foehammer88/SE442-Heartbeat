@@ -42,7 +42,7 @@ public class Alarm {
         		System.out.println("Nurse Alarm Buffer is full, sending alarm to local buffer...");
         		bufferAlarm(color, patientID);
         	} else { 
-        		 NurseAlarmReceiver ns = (NurseAlarmReceiver) registry.lookup(ns_handle);
+        		 NurseRMI ns = (NurseRMI) registry.lookup(ns_handle);
                  AlarmPair p = new AlarmPair(patientID, color);
                  ns.alarmRaised(p);
         	}
