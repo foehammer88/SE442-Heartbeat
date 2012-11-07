@@ -31,6 +31,12 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 		bedSide = (BedSideRMI)rmiRegistry.lookup(bedSideRMI);
 	}
 	
+	public void acknowledgeAlarm() throws RemoteException { 
+		
+		System.out.println("Sending acknowledge alarm signal to bed side");
+		bedSide.alarmAcknowledged();
+	}
+	
 	public String registerPatientToBedSide(String patientID, String patientName, String admitDate, String patientType) { 
 		
 		String message = "";
