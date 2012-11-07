@@ -36,6 +36,11 @@ public class NurseView extends MonitorView{
 	private JFrame frmPatientTrend;
 	private PatientTrend winPatientTrend;
 
+	JTextPane textPaneBP;
+	JTextPane textPaneHR;
+	JTextPane textPaneTemp;
+	JTextPane textPaneRR;
+	
 	private NurseStation nurseStation;
 	private NurseView nurseView;
 	/**
@@ -202,10 +207,10 @@ public class NurseView extends MonitorView{
 		txtpnNibp.setText("NIBP:");
 		panel_2.add(txtpnNibp);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setText("120/80");
-		panel_2.add(textPane);
+		textPaneBP = new JTextPane();
+		textPaneBP.setEditable(false);
+		textPaneBP.setText("120/80");
+		panel_2.add(textPaneBP);
 		
 		JRadioButton radioButton = new JRadioButton("");
 		radioButton.setEnabled(false);
@@ -286,6 +291,13 @@ public class NurseView extends MonitorView{
 		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
 		nurseStation.admitPatient(idInt.toString(), name, type);
 		
+	}
+	
+	public void updateVitals(String bp, String hr, String temp, String rr){
+		textPaneBP.setText(bp);
+		//textPaneHR.setText(hr);
+		//textPaneTemp.setText(temp);
+		//textPaneRR.setText(rr);
 	}
 	
 }

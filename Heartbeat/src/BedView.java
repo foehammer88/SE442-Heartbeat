@@ -83,7 +83,6 @@ public class BedView extends MonitorView{
 	 */
 	public BedView() {
 		bedview = this;
-		initialize();
 	}
 
 	public BedView(BedInterface bedInter) {
@@ -92,6 +91,11 @@ public class BedView extends MonitorView{
 		initialize();
 	}
 
+	public void startBedView(BedInterface bedInter){
+		bedInterface = bedInter;
+		initialize();
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -324,7 +328,6 @@ public class BedView extends MonitorView{
 		textPaneHR.setText(hr);
 		textPaneTemp.setText(temp);
 		textPaneRR.setText(rr);
-		
 	}
 
 }
