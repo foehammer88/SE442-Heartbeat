@@ -3,6 +3,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -13,34 +14,48 @@ import java.util.LinkedList;
 public class NurseAlarmReceiverImpl extends UnicastRemoteObject implements NurseAlarmReceiver{
 	
 	private String rmiRegistryName = "Nurse-Alarm-Receiver";
-	private LinkedList alarmBuffer = new LinkedList();  
+	private ArrayList<AlarmPair> localAlarmBuffer; 
 	private boolean bufferFull; 
 	
 	/**
 	 * Constructor
 	 * @throws RemoteException
 	 */
-	public NurseAlarmReceiverImpl() throws RemoteException { 
+	public NurseAlarmReceiverImpl(NurseStation nurseStation) throws RemoteException { 
 		
+		localAlarmBuffer = new ArrayList<AlarmPair>();
 	}
 	
-	public void alarmRaised(String alarm, String patientID) throws RemoteException{ 
+	private boolean checkIfAlarmBufferFull() { 
 		
+		if (localAlarmBuffer.size() == 25) { 
+			return true; 
+		} else { 
+			return false; 
+		}
+	}
+	
+	public void alarmRaised(AlarmPair alarmObject) throws RemoteException{ 
+		
+		if (checkIfAlarmBufferFull()) { 
+			notifyBedSideOfAlarmBuffer(true);
+		} else { 
 		//Add to alarm buffer 
-		
-		//If alarm buffer full then notify bed side 
-		
+		localAlarmBuffer.add(alarmObject);
+		}
 		
 	}
 	
-	public void notifyBedSide() { 
+	/**
+	 * Method to notify of Alarm Buffer
+	 */
+	public void notifyBedSideOfAlarmBuffer(boolean status) { 
 		
 	}
 	
 	public void bindToRegistry() throws RemoteException, MalformedURLException { 
-		System.out.println("Binding nurse alarm to RMI registry");
-		NurseAlarmReceiverImpl nurseAlarm = new NurseAlarmReceiverImpl(); 
-		Naming.rebind(rmiRegistryName, nurseAlarm);
+		System.out.println("Binding nurse alarm to RMI registry"); 
+		Naming.rebind(rmiRegistryName, this);
 	}
 	
 	public void unBindToRegistry() throws RemoteException, MalformedURLException, NotBoundException { 
