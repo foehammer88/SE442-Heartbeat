@@ -227,6 +227,12 @@ public class Patient implements Runnable {
 		
 	}
 
+	
+	public void sendPatientData() { 
+		
+		
+	}
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
