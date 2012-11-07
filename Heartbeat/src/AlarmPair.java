@@ -1,9 +1,12 @@
-public class AlarmPair {
+import java.io.Serializable;
+import java.rmi.Remote;
+
+public class AlarmPair implements Remote, Serializable{
     
     private String id;
     private String alarmType;
     
-    public AlarmPair(String id, String alarmType) {
+    public AlarmPair(String id, String alarmType){
         this.id = id;
         this.alarmType = alarmType;
     }
