@@ -75,9 +75,14 @@ public class BedInterface{
 		try { 
 			bedRMI = new BedSideRMIImpl(bedInterface, alarm); 
 			
+			//Start bed side rmi 
 			System.out.println("Starting Bed Side RMI Service.");
 			bedRMI.startBedSideRMI();
 			rmiStarted = true; 
+			
+			//Intialize alarm registry 
+			alarm.initializeRegistry("localhost", -1);
+			
 		} catch (Exception excep) { 
 			System.out.println("Warning! Exception Found! Could not start RMI service on Bed Side");
 			excep.printStackTrace();
