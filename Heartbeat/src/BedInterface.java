@@ -14,8 +14,13 @@ public class BedInterface{
 	/**
 	 * Constructor
 	 */
-	public BedInterface() { 
+	public BedInterface(BedView bedView) { 
 		this.bedView = bedView; 
+	}
+	
+	public void updateVitals(String bp, String hr, String temp, String rr) { 
+		
+		bedView.updateVitals(bp, hr, temp, rr);
 	}
 	
 	/**
@@ -66,8 +71,9 @@ public class BedInterface{
 	public static void main(String[] args) { 
 		
 		BedSideRMIImpl bedRMI;
-		BedInterface bedInterface = new BedInterface();
-		BedView bedView = new BedView(bedInterface); ;
+		BedView bedView = new BedView(); 
+		BedInterface bedInterface = new BedInterface(bedView);
+		bedView.startBedView(bedInterface);
 		Alarm alarm = new Alarm();
 		
 		boolean rmiStarted = false ; 
