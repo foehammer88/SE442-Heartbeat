@@ -38,6 +38,9 @@ public class BedView extends MonitorView{
 	JTextPane textPaneTemp;
 	JTextPane textPaneRR;
 	
+	JTextPane txtpnPatientName;
+	JTextPane txtpnPatientId;
+	
 	private BedView bedview;
 	BedInterface bedInterface;
 	/**
@@ -107,13 +110,13 @@ public class BedView extends MonitorView{
 		panel.add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JTextPane txtpnPatientName = new JTextPane();
+		txtpnPatientName = new JTextPane();
 		txtpnPatientName.setEditable(false);
 		txtpnPatientName.setText("Patient Name");
 		txtpnPatientName.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel_1.add(txtpnPatientName);
 		
-		JTextPane txtpnPatientId = new JTextPane();
+		txtpnPatientId = new JTextPane();
 		txtpnPatientId.setEditable(false);
 		txtpnPatientId.setText("Patient ID");
 		txtpnPatientId.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -177,6 +180,9 @@ public class BedView extends MonitorView{
 		
 		JButton btnResetAlarm = new JButton("Reset Alarm");
 		panel_2.add(btnResetAlarm);
+		
+		JButton btnCallNurse = new JButton("Call Nurse");
+		panel_2.add(btnCallNurse);
 //		
 //		JTextPane txtpnPatientName = new JTextPane();
 //		txtpnPatientName.setText("Patient Name");
@@ -306,8 +312,11 @@ public class BedView extends MonitorView{
 		Random rand = new Random();
 		Integer idInt = rand.nextInt(9999) + 1;
 		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
-		bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
 		
+		txtpnPatientName.setText("Patient Name: " + name);
+		txtpnPatientId.setText("Patient ID: " + idInt.toString());
+		
+		bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
 	}
 	
 	public void updateVitals(String bp, String hr, String temp, String rr){
