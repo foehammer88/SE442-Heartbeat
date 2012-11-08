@@ -27,7 +27,7 @@ public class BedInterface{
 		bedView.updateVitals(bp, hr, temp, rr);
 		
 		//Send Vitals to Nurse side via bedside communciator 
-		//bedSideComm.sendPatientVitalSigns(bp, hr, temp, rr);
+		bedSideComm.sendPatientVitalSigns(bp, hr, temp, rr);
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class BedInterface{
 		//Show Bed View only if RMI interface started 
 		if (rmiStarted) {
 			System.out.println("Loading Bed Side View....");
-			bedView.main(null);
+			bedView.showWindow();
 		}
 	}
 }
