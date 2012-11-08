@@ -3,6 +3,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * 
@@ -23,9 +24,9 @@ public class BedSideRMIImpl extends UnicastRemoteObject implements BedSideRMI{
 		this.alarm = alarm;
 	}
 	
-	public synchronized void getPatientTrendInfo() throws RemoteException { 
+	public synchronized ArrayList<ArrayList> getPatientTrendInfo() throws RemoteException { 
 		
-		bedInterface.getPatientTrendDate();
+		return bedInterface.getPatientTrendDate();
 	}
 	
 	public synchronized String registerPatientToBedSide(String patientName, String patientID, String nurseRegistryID, String admitDate, String patientType) throws RemoteException { 
