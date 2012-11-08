@@ -330,9 +330,9 @@ public class NurseView extends MonitorView{
 		}
 	}
 
-	public void getPatientData(String patientName) {
+	public void getPatientData(String patientName, PatientTrend patientTrend) {
 		// TODO Auto-generated method stub
-		nurseStation.getPatientTrendData(patientName);
+		nurseStation.getPatientTrendData(patientName, patientTrend);
 	}
 	
 }

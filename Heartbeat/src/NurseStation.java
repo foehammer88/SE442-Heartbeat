@@ -82,8 +82,9 @@ public class NurseStation {
 	/**
 	 * Method to get patient trend data 
 	 * @param patientID - the id of patient 
+	 * @param patientTrend 
 	 */
-	public void getPatientTrendData(String patientID) { 
+	public void getPatientTrendData(String patientID, PatientTrend patientTrend) { 
 		
 		communicator.getPatientTrendData(patientID);
 	}
