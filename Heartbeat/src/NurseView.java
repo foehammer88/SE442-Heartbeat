@@ -105,6 +105,10 @@ public class NurseView extends MonitorView{
 		initialize();
 	}
 	
+	public void showWindow(){
+		frmNurseMonitor.setVisible(true);
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
