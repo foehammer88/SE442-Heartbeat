@@ -99,6 +99,10 @@ public class BedView extends MonitorView{
 		initialize();
 	}
 	
+	public void showWindow(){
+		frmBedsideMonitor.setVisible(true);
+	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -340,6 +344,7 @@ public class BedView extends MonitorView{
 			panel_AlarmCode.setBackground(Color.YELLOW);
 		}
 	}
+	
 	
 	public void openPatient(String patientName, String patientId){
 		txtpnPatientName.setText("Patient Name: " + patientName);

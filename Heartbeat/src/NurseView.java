@@ -36,6 +36,9 @@ public class NurseView extends MonitorView{
 	private JFrame frmPatientTrend;
 	private PatientTrend winPatientTrend;
 
+	JTextPane txtpnPatientName;
+	JTextPane txtpnPatientId;
+	
 	JTextPane textPaneBP;
 	JTextPane textPaneHR;
 	JTextPane textPaneTemp;
@@ -116,7 +119,7 @@ public class NurseView extends MonitorView{
 		frmNurseMonitor = new JFrame();
 		frmNurseMonitor.setTitle("Nurse Monitor\r\n");
 		frmNurseMonitor.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\AnDev\\git\\SE442-Heartbeat\\Heartbeat\\heartbeat.jpg"));	
-		frmNurseMonitor.setBounds(100, 100, 450, 300);
+		frmNurseMonitor.setBounds(100, 100, 475, 300);
 		frmNurseMonitor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -190,13 +193,13 @@ public class NurseView extends MonitorView{
 		panel.add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JTextPane txtpnPatientName = new JTextPane();
+		txtpnPatientName = new JTextPane();
 		txtpnPatientName.setEditable(false);
 		txtpnPatientName.setText("Patient Name");
 		txtpnPatientName.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel_1.add(txtpnPatientName);
 		
-		JTextPane txtpnPatientId = new JTextPane();
+		txtpnPatientId = new JTextPane();
 		txtpnPatientId.setEditable(false);
 		txtpnPatientId.setText("Patient ID");
 		txtpnPatientId.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -287,8 +290,13 @@ public class NurseView extends MonitorView{
 		panel_AlarmCode.setBackground(Color.GREEN);
 		panel_2.add(panel_AlarmCode);
 		
-		JButton btnResetAlarm = new JButton("Reset Alarm");
-		panel_2.add(btnResetAlarm);
+		JButton btnAckAlarm = new JButton("Acknowledge Alarm");
+		btnAckAlarm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nurseStation.acknowledgeAlarm(txtpnPatientName.getText());
+			}
+		});
+		panel_2.add(btnAckAlarm);
 	}
 
 	public void createTrendWindow(){
@@ -305,6 +313,8 @@ public class NurseView extends MonitorView{
 		Random rand = new Random();
 		Integer idInt = rand.nextInt(9999) + 1;
 		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
+		txtpnPatientName.setText(name);
+		txtpnPatientId.setText(idInt.toString());
 		nurseStation.admitPatient(idInt.toString(), name, type);
 		
 	}

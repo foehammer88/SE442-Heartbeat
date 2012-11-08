@@ -92,7 +92,7 @@ public class NurseStation {
 	/**
 	 * Method which handle the acknowledgement of alarms from the nurse 
 	 */
-	public void acknowledgeAlaram(String patientName) { 
+	public void acknowledgeAlarm(String patientName) { 
 		
 		try {
 			communicator.acknowledgeAlarm();
