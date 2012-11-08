@@ -34,7 +34,7 @@ import java.awt.event.MouseEvent;
 public class PatientTrend {
 
 	private NurseView nurseView;
-	
+	private PatientTrend patientTrend;
 	private JFrame frmPatientTrend;
 
 	private JList patientList;
@@ -91,6 +91,8 @@ public class PatientTrend {
 	}
 
 	public PatientTrend() {
+		patientTrend = this;
+		
 		listModel = new DefaultListModel();
         listModel.addElement("John Doe");
         listModel.addElement("John Smith");
@@ -109,6 +111,7 @@ public class PatientTrend {
 	}
 	
 	public PatientTrend(NurseView nv, DefaultListModel patientList) {
+		patientTrend = this;
 		listModel = patientList;
         nurseView = nv;
         
@@ -214,7 +217,7 @@ public class PatientTrend {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println(patientList.getSelectedValue());
-				nurseView.getPatientData(patientList.getSelectedValue().toString());
+				nurseView.getPatientData(patientList.getSelectedValue().toString(), patientTrend);
 				simulateGraphs();
 			}
 		});
