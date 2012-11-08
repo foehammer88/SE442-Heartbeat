@@ -20,8 +20,8 @@ public class Alarm {
      */
     public static void initializeRegistry(String host, int port) throws RemoteException {
         if(registry == null) {
-            if(port < 0) {
-                registry = LocateRegistry.getRegistry(host);
+            if(port < 0 && host.equals("")) {
+                registry = LocateRegistry.getRegistry();
             }else {
                 registry = LocateRegistry.getRegistry(host, port);
             }
