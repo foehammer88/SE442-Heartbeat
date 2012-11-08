@@ -177,6 +177,22 @@ public class Patient implements Runnable {
 		String temp = String.valueOf(patientTemp);
 		String rr = String.valueOf(patientRespRate);
 		sendPatientData(hr,bp,temp,rr);
+
+		//Generating alarm 
+		if (patientType == "Adult" ) { 	
+			if (patientBloodPressure > 120) { 
+				generateAlarm("Red");
+			}
+			if (patientTemp > 100) { 
+				generateAlarm("Red");
+			}
+			if (patientPulse > 105) { 
+				generateAlarm("Red");
+			}
+			if (patientRespRate > 20) { 
+				generateAlarm("Red");
+			}
+		}
 	}
 	
 	public void generateAlarm(String alarmType){
