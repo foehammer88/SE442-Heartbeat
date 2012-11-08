@@ -42,5 +42,14 @@ public class BedSideCommunicator extends UnicastRemoteObject{
 			excep.printStackTrace();
 		}
 	}
-
+	
+	public void callNurse(String patientName) { 
+		try { 
+			connectToNurseSideRMI("localhost", -1);
+			nsRMI.callNurse(patientName);
+		} catch (Exception excep) { 
+			System.out.println("Warning! Found an Exception! Trying to call nurse"); 
+			excep.printStackTrace();
+		}
+	}
 }

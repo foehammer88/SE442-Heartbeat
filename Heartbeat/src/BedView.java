@@ -214,6 +214,11 @@ public class BedView extends MonitorView{
 		panel_2.add(btnResetAlarm);
 		
 		JButton btnCallNurse = new JButton("Call Nurse");
+		btnCallNurse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				callNurse();
+			}
+		});
 		panel_2.add(btnCallNurse);
 //		
 //		JTextPane txtpnPatientName = new JTextPane();
@@ -386,6 +391,10 @@ public class BedView extends MonitorView{
 	public void resetAlarm(){
 		panel_AlarmCode.setBackground(Color.GREEN);
 		panel_AlarmCode.revalidate();
+	}
+	
+	public void callNurse() { 
+		bedInterface.callNurse();
 	}
 	
 	public void openPatient(String patientName, String patientId){

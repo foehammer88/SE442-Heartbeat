@@ -66,6 +66,10 @@ public class NurseRMIImpl extends UnicastRemoteObject implements NurseRMI{
 		notifyNurseStationAlarmInBuffer(localAlarmBuffer); 
 	}
 	
+	public void callNurse(String patientName) throws RemoteException { 
+		nurseStation.callNurse(patientName);
+	}
+	
 	/**
 	 * Method to notify of Alarm Buffer
 	 */

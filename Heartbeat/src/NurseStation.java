@@ -112,6 +112,10 @@ public class NurseStation {
 		nurseView.setAlarm(patientName, vital, degree);
 	}
 	
+	public void callNurse(String patientName) { 
+		nurseView.callNurse(patientName);
+	}
+	
 	/**
 	 * Main Method for Nurse System 
 	 * @param args

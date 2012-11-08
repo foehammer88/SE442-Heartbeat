@@ -94,6 +94,10 @@ public class BedInterface{
 		patient.startPatientVitalSigns();
 	}
 	
+	public void callNurse() { 
+		bedSideComm.callNurse(patient.getPatientName());
+	}
+	
 	/**
 	 * Main Method for the bed side system 
 	 * @throws RemoteException 

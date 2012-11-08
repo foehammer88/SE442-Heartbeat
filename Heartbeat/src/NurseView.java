@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
@@ -365,6 +366,11 @@ public class NurseView extends MonitorView{
 		} else if (vital.equals("RR")){
 			radioRR.setSelected(true);
 		}
+	}
+	
+	public void callNurse(String patientName) { 
+		JOptionPane optionPane = new JOptionPane(patientName + "is requesting a nurse!", JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_OPTION);
+		optionPane.showMessageDialog(null, "Patient Calling Nurse.");
 	}
 
 	public void getPatientData(String patientName, PatientTrend patientTrend) {
