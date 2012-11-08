@@ -180,16 +180,17 @@ public class Patient implements Runnable {
 
 		//Generating alarm 
 		if (patientType == "Adult" ) { 	
-			if (patientBloodPressure > 120) { 
+			if (patientBloodPressure > 115) { 
 				generateAlarm("Red");
 			}
-			if (patientTemp > 100) { 
+			System.out.println(patientTemp);
+			if (patientTemp > 90) { 
 				generateAlarm("Red");
 			}
-			if (patientPulse > 105) { 
+			if (patientPulse > 95) { 
 				generateAlarm("Red");
 			}
-			if (patientRespRate > 20) { 
+			if (patientRespRate > 15) { 
 				generateAlarm("Red");
 			}
 		}
@@ -262,6 +263,10 @@ public class Patient implements Runnable {
 	public void setController(BedInterface bedInterface) { 
 		
 		this.bedInterface = bedInterface;
+	}
+	
+	public void startPatientVitalSigns() { 
+		(new Thread(this)).start();
 	}
 	
 	@Override
