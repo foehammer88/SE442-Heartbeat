@@ -92,7 +92,7 @@ public class PatientTrend {
 
 	public PatientTrend() {
 		patientTrend = this;
-		
+		nurseView = new NurseView();
 		listModel = new DefaultListModel();
         listModel.addElement("John Doe");
         listModel.addElement("John Smith");
