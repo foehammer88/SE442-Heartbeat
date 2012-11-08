@@ -314,6 +314,7 @@ public class NurseView extends MonitorView{
 	
 	public void setAlarm(String patientName, String vital, String degree){
 		if (degree.equals("Red")){
+			System.out.println("Got red");
 			panel_AlarmCode.setBackground(Color.RED);
 		} else if(degree.equals("Yellow")){
 			panel_AlarmCode.setBackground(Color.YELLOW);
