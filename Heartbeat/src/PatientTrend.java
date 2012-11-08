@@ -132,6 +132,7 @@ public class PatientTrend {
 	 */
 	public PatientTrend(ArrayList<Integer> dBP, ArrayList<Integer> dHR, ArrayList<Integer> dTemp,
 			ArrayList<Integer> dRR, DefaultListModel patientList) {
+		patientTrend = this;
 		listModel = patientList;
         
         dataBP = dBP;
