@@ -287,10 +287,10 @@ public class NurseView extends MonitorView{
 		txtpnRespiratoryRate.setText("Respiratory rate:");
 		panel_2.add(txtpnRespiratoryRate);
 		
-		textPaneHR = new JTextPane();
-		textPaneHR.setEditable(false);
-		textPaneHR.setText("30");
-		panel_2.add(textPaneHR);
+		textPaneRR = new JTextPane();
+		textPaneRR.setEditable(false);
+		textPaneRR.setText("30");
+		panel_2.add(textPaneRR);
 		
 		radioRR = new JRadioButton("");
 		radioRR.setEnabled(false);
