@@ -80,8 +80,8 @@ public class PatientTrend {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PatientTrend window = new PatientTrend();
-					window.frmPatientTrend.setVisible(true);
+					//PatientTrend window = new PatientTrend();
+					//window.frmPatientTrend.setVisible(true);
 					//window.simulateGraphs();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,9 +90,9 @@ public class PatientTrend {
 		});
 	}
 
-	public PatientTrend() {
+	public PatientTrend(NurseView nv) {
 		patientTrend = this;
-		nurseView = new NurseView();
+		nurseView = nv;
 		listModel = new DefaultListModel();
         listModel.addElement("John Doe");
         listModel.addElement("John Smith");
