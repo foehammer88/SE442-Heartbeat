@@ -156,6 +156,22 @@ public class PatientTrend {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {
+            // Set System L&F
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		}
+		catch (ClassNotFoundException e) {
+			// handle exception
+		}
+		catch (InstantiationException e) {
+			// handle exception
+		}
+		catch (IllegalAccessException e) {
+			// handle exception
+		}
 		frmPatientTrend = new JFrame();
 		frmPatientTrend.setTitle("Patient Trend");
 		frmPatientTrend.setBounds(300, 150, 1000, 750);

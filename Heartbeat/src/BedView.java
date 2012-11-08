@@ -190,6 +190,11 @@ public class BedView extends MonitorView{
 		panel_2.add(panel_AlarmCode);
 		
 		JButton btnResetAlarm = new JButton("Reset Alarm");
+		btnResetAlarm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		panel_2.add(btnResetAlarm);
 		
 		JButton btnCallNurse = new JButton("Call Nurse");
@@ -343,8 +348,13 @@ public class BedView extends MonitorView{
 		} else if(degree.equals("Yellow")){
 			panel_AlarmCode.setBackground(Color.YELLOW);
 		}
+		panel_AlarmCode.revalidate();
 	}
 	
+	public void resetAlarm(){
+		panel_AlarmCode.setBackground(Color.GREEN);
+		panel_AlarmCode.revalidate();
+	}
 	
 	public void openPatient(String patientName, String patientId){
 		txtpnPatientName.setText("Patient Name: " + patientName);

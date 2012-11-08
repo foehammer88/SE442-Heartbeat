@@ -116,6 +116,22 @@ public class NurseView extends MonitorView{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {
+            // Set System L&F
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		}
+		catch (ClassNotFoundException e) {
+			// handle exception
+		}
+		catch (InstantiationException e) {
+			// handle exception
+		}
+		catch (IllegalAccessException e) {
+			// handle exception
+		}
 		frmNurseMonitor = new JFrame();
 		frmNurseMonitor.setTitle("Nurse Monitor\r\n");
 		frmNurseMonitor.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\AnDev\\git\\SE442-Heartbeat\\Heartbeat\\heartbeat.jpg"));	
