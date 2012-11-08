@@ -1,5 +1,6 @@
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /** 
  * 
@@ -8,7 +9,7 @@ import java.rmi.RemoteException;
  */
 public interface BedSideRMI extends Remote{
 
-	public void getPatientTrendInfo() throws RemoteException; 
+	public ArrayList<ArrayList> getPatientTrendInfo() throws RemoteException; 
 	
 	public String registerPatientToBedSide(String patiendName, String patientID, String nurseRegistryID, String admitDate, String patientType) throws RemoteException; 
 
