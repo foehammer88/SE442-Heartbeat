@@ -50,6 +50,7 @@ public class NurseRMIImpl extends UnicastRemoteObject implements NurseRMI{
 	
 	public void receivePatientVitals(String bp, String hr, String temp, String rr) throws RemoteException{ 
 		
+		System.out.println("Got push to update patient vital signs");
 		nurseStation.updateVitals(bp, hr, temp, rr);
 	}
 	
