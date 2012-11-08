@@ -38,8 +38,12 @@ public class NurseView extends MonitorView{
 	private JFrame frmPatientTrend;
 	private PatientTrend winPatientTrend;
 
+	private JPanel panelPatient;
+	private JTabbedPane tabbedPane;
+	
 	JTextPane txtpnPatientName;
 	JTextPane txtpnPatientId;
+	JTextPane textPaneAdDate;
 	
 	JTextPane textPaneBP;
 	JTextPane textPaneHR;
@@ -200,15 +204,15 @@ public class NurseView extends MonitorView{
 		});
 		mnTools.add(mntmDisplayHistory);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmNurseMonitor.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
-		panel.setLayout(new BorderLayout(0, 0));
+		panelPatient = new JPanel();
+		tabbedPane.addTab("New tab", null, panelPatient, null);
+		panelPatient.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel_1 = new JPanel();
-		panel.add(panel_1, BorderLayout.NORTH);
+		panelPatient.add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		txtpnPatientName = new JTextPane();
@@ -229,14 +233,14 @@ public class NurseView extends MonitorView{
 		txtpnAdmitDate.setText("Admit Date:");
 		panel_1.add(txtpnAdmitDate);
 		
-		JTextPane textPane_4 = new JTextPane();
-		textPane_4.setEditable(false);
-		textPane_4.setBorder(new LineBorder(new Color(0, 0, 0)));
-		textPane_4.setText("11/30/2012");
-		panel_1.add(textPane_4);
+		textPaneAdDate = new JTextPane();
+		textPaneAdDate.setEditable(false);
+		textPaneAdDate.setBorder(new LineBorder(new Color(0, 0, 0)));
+		textPaneAdDate.setText("11/30/2012");
+		panel_1.add(textPaneAdDate);
 		
 		JPanel panel_2 = new JPanel();
-		panel.add(panel_2, BorderLayout.CENTER);
+		panelPatient.add(panel_2, BorderLayout.CENTER);
 		panel_2.setLayout(new GridLayout(0, 3, 0, 0));
 		
 		JTextPane txtpnNibp = new JTextPane();
@@ -333,6 +337,9 @@ public class NurseView extends MonitorView{
 		System.out.println(name + ", " + type  + ", " + idInt.toString() +", " + reportDate);
 		txtpnPatientName.setText(name);
 		txtpnPatientId.setText(idInt.toString());
+		df = new SimpleDateFormat("MM/dd/yy");
+		textPaneAdDate.setText(df.format(today));
+		tabbedPane.addTab(name, null, panelPatient, null);
 		nurseStation.admitPatient(idInt.toString(), name, type);
 		
 	}
@@ -366,6 +373,11 @@ public class NurseView extends MonitorView{
 		} else if (vital.equals("RR")){
 			radioRR.setSelected(true);
 		}
+	}
+	
+	public void resetAlarm(){
+		panel_AlarmCode.setBackground(Color.GREEN);
+		panel_AlarmCode.revalidate();
 	}
 	
 	public void callNurse(String patientName) { 
