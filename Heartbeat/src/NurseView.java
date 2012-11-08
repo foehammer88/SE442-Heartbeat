@@ -293,7 +293,7 @@ public class NurseView extends MonitorView{
 
 	public void createTrendWindow(){
 		System.out.println("Creating Trend Window");
-		winPatientTrend = new PatientTrend();
+		winPatientTrend = new PatientTrend(this);
 	}
 	
 	public void addPatient(String name, String type){
