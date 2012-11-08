@@ -10,6 +10,7 @@ public class BedInterface{
 	
 	private Patient patient; 
 	private BedView bedView; 
+	private BedSideCommunicator bedSideComm; 
 	
 	/**
 	 * Constructor
@@ -20,7 +21,11 @@ public class BedInterface{
 	
 	public void updateVitals(String bp, String hr, String temp, String rr) { 
 		
+		//Update Vitals for bed view 
 		bedView.updateVitals(bp, hr, temp, rr);
+		
+		//Send Vitals to Nurse side via bedside communciator 
+		bedSideComm.sendPatientVitalSigns(bp, hr, temp, rr);
 	}
 	
 	/**
@@ -63,6 +68,10 @@ public class BedInterface{
 	public void alarmAcknowledged() { 
 		
 		patient.acknowledgeAlarm("yes");
+	}
+	
+	public void setBedSideComm(BedSideCommunicator bedSideComm) { 
+		this.bedSideComm = bedSideComm;
 	}
 	
 	/**
