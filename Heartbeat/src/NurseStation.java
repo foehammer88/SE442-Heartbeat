@@ -42,6 +42,7 @@ public class NurseStation {
 	
 	public void updateVitals(String bp, String hr, String temp, String rr) { 
 		
+		System.out.println("Updating vitals");
 		nurseView.updateVitals(bp, hr, temp, rr);
 	}
 	
