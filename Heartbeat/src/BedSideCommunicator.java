@@ -31,12 +31,12 @@ public class BedSideCommunicator extends UnicastRemoteObject{
         }
 	}
 	
-	public void sendPatientVitalSigns(){ 
+	public void sendPatientVitalSigns(String bp, String hr, String temp, String rr){ 
 		
 		try { 
 			connectToNurseSideRMI("localhost", -1);
 			nsRMI = (NurseRMI) registry.lookup(ns_handle);
-			
+			nsRMI.receivePatientVitals(bp, hr, temp, rr);
 		} catch(Exception excep) { 
 			System.out.println("Warning! Found an Exception!");
 			excep.printStackTrace();
