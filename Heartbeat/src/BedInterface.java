@@ -1,3 +1,5 @@
+import java.rmi.RemoteException;
+
 /**
  * 
  */
@@ -25,7 +27,7 @@ public class BedInterface{
 		bedView.updateVitals(bp, hr, temp, rr);
 		
 		//Send Vitals to Nurse side via bedside communciator 
-		bedSideComm.sendPatientVitalSigns(bp, hr, temp, rr);
+		//bedSideComm.sendPatientVitalSigns(bp, hr, temp, rr);
 	}
 	
 	/**
@@ -37,7 +39,13 @@ public class BedInterface{
 	public void registerPatient(String patientName, String patientType, String patientID, String admitDate) { 
 		
 		//Create a new patient
-		patient = new Patient(patientName, patientID, admitDate, "", patientType, null);
+		patient = new Patient(patientName, patientID, admitDate, "", patientType, 1000);
+		patient.setController(this);
+		System.out.println("Patient Registerd is: " + patient.getPatientName());
+	
+		//Generate Patient Vitals 
+		System.out.println("Generating Automatic Patient Vital Signs");
+		patient.startPatientVitalSigns();
 	}
 	
 	/**
@@ -76,12 +84,21 @@ public class BedInterface{
 	
 	/**
 	 * Main Method for the bed side system 
+	 * @throws RemoteException 
 	 */
 	public static void main(String[] args) { 
 		
 		BedSideRMIImpl bedRMI;
+		BedSideCommunicator bedSideComm = null;
+		try { 
+			bedSideComm= new BedSideCommunicator();
+		} catch (Exception excep) { 
+			System.out.println("Error trying to establish communication with nurse");
+			excep.printStackTrace();
+		}
 		BedView bedView = new BedView(); 
 		BedInterface bedInterface = new BedInterface(bedView);
+		bedInterface.setBedSideComm(bedSideComm);
 		bedView.startBedView(bedInterface);
 		Alarm alarm = new Alarm();
 		
@@ -97,7 +114,7 @@ public class BedInterface{
 			rmiStarted = true; 
 			
 			//Intialize alarm registry 
-			alarm.initializeRegistry("localhost", -1);
+			alarm.initializeRegistry("", -1);
 			
 		} catch (Exception excep) { 
 			System.out.println("Warning! Exception Found! Could not start RMI service on Bed Side");
