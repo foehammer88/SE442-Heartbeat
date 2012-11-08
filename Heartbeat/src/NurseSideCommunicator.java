@@ -68,7 +68,7 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 	public void getPatientTrendData(String patientID) { 
 		
 		try { 
-			
+			connectoBedSide();
 			bedSide.getPatientTrendInfo();
 			
 		} catch(Exception excep) { 
@@ -80,7 +80,7 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 	public void sendNurseSideBufferInfo(boolean status) { 
 		
 		try { 
-			
+			connectoBedSide();
 			bedSide.alarmQueueStatus(status);
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an exception trying to sent nurse side alarm buffer status");
