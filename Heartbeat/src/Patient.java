@@ -176,7 +176,7 @@ public class Patient implements Runnable {
 		String bp = String.valueOf(patientBloodPressure);
 		String temp = String.valueOf(patientTemp);
 		String rr = String.valueOf(patientRespRate);
-		sendPatientData(hr,bp,temp,rr);
+		sendPatientData(bp,hr,temp,rr);
 
 		//Generating alarm 
 		if (patientType == "Adult" ) { 	
