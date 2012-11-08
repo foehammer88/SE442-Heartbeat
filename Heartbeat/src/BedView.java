@@ -340,4 +340,9 @@ public class BedView extends MonitorView{
 			panel_AlarmCode.setBackground(Color.YELLOW);
 		}
 	}
+	
+	public void openPatient(String patientName, String patientId){
+		txtpnPatientName.setText("Patient Name: " + patientName);
+		txtpnPatientId.setText("Patient ID: " + patientId);
+	}
 }

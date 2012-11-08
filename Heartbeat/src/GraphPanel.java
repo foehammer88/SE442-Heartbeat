@@ -30,6 +30,11 @@ public class GraphPanel extends JPanel{
 		}
 	}
 
+	public void setGraph(ArrayList<Integer> data, String type){
+		dataPoints = data;
+		graphType = type;
+	}
+	
 	private void drawGraph(Graphics g) {
 		// Origin (25,320)
 		// Top (25, 40) 280

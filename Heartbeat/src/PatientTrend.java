@@ -39,6 +39,11 @@ public class PatientTrend {
     private ArrayList<Integer> dataTemp;
     private ArrayList<Integer> dataRR;
     
+    GraphPanel gPanelBP;
+    GraphPanel gPanelHR;
+    GraphPanel gPanelTemp;
+    GraphPanel gPanelRR;
+    
 	/**
 	 * Launch the application.
 	 */
@@ -194,19 +199,19 @@ public class PatientTrend {
 		for(int i = 0; i < 100; i++){
 			dataBP.add(rand.nextInt(200 - 60 + 1) + 60);
 		}
-		GraphPanel gPanelSystolic = new GraphPanel(dataBP, "BP");
-		gPanelSystolic.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		gPanelSystolic.setBackground(Color.WHITE);
+		gPanelBP = new GraphPanel(dataBP, "BP");
+		gPanelBP.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		gPanelBP.setBackground(Color.WHITE);
 		JLabel lblSystolic = new JLabel("Systolic Blood Pressure");
 		lblSystolic.setForeground(Color.WHITE);
-		gPanelSystolic.add(lblSystolic);
-		panel_1.add(gPanelSystolic);
+		gPanelBP.add(lblSystolic);
+		panel_1.add(gPanelBP);
 		
 		ArrayList<Integer> dataHR = new ArrayList<Integer>();
 		for(int i = 0; i < 10; i++){
 			dataHR.add(rand.nextInt(200 - 0 + 1) + 0);
 		}
-		GraphPanel gPanelHR = new GraphPanel(dataHR, "HR");
+		gPanelHR = new GraphPanel(dataHR, "HR");
 		gPanelHR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblHR = new JLabel("Heart Rate");
 		lblHR.setForeground(Color.WHITE);
@@ -217,7 +222,7 @@ public class PatientTrend {
 		for(int i = 0; i < 10; i++){
 			dataTemp.add(rand.nextInt(120 - 50 + 1) + 50);
 		}
-		GraphPanel gPanelTemp = new GraphPanel(dataTemp, "Temp");
+		gPanelTemp = new GraphPanel(dataTemp, "Temp");
 		gPanelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblTemp = new JLabel("Temperature");
 		lblTemp.setForeground(Color.WHITE);
@@ -228,12 +233,20 @@ public class PatientTrend {
 		for(int i = 0; i < 10; i++){
 			dataRR.add(rand.nextInt(150 - 0 + 1) + 0);
 		}
-		GraphPanel gPanelRR= new GraphPanel(dataRR, "RR");
+		gPanelRR = new GraphPanel(dataRR, "RR");
 		gPanelRR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		JLabel lblRR = new JLabel("Respiratory Rate");
 		lblRR.setForeground(Color.WHITE);
 		gPanelRR.add(lblRR);
 		panel_1.add(gPanelRR);
 	}
-
+	
+	public void drawGraphs(ArrayList<Integer> dBP, ArrayList<Integer> dHR, ArrayList<Integer> dTemp,
+			ArrayList<Integer> dRR){
+		dataBP = dBP;
+	    dataHR = dHR;
+	    dataTemp = dTemp;
+	    dataRR = dRR;
+	    
+	}
 }
