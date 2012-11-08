@@ -56,8 +56,7 @@ public class NurseStation {
 		String admitDate = getCurrentTimeDate();
 		
 		try { 
-			String message = communicator.registerPatientToBedSide(patientID, patientName, admitDate, patientType);
-			System.out.println("Message from bed side: " + message);
+			communicator.registerPatientToBedSide(patientID, patientName, admitDate, patientType);
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an exception");
 			excep.printStackTrace();

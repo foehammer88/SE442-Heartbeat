@@ -94,9 +94,7 @@ public class PatientTrend {
 		patientTrend = this;
 		nurseView = nv;
 		listModel = new DefaultListModel();
-        listModel.addElement("John Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Patrick Ganson");
+        listModel.addElement("New Patient");
         
         EventQueue.invokeLater(new Runnable() {
 			public void run() {

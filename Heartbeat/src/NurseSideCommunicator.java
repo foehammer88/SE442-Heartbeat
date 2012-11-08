@@ -38,7 +38,7 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 		bedSide.alarmAcknowledged();
 	}
 	
-	public String registerPatientToBedSide(String patientID, String patientName, String admitDate, String patientType) { 
+	public void registerPatientToBedSide(String patientID, String patientName, String admitDate, String patientType) { 
 		
 		String message = "";
 		
@@ -46,13 +46,11 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 			
 			connectoBedSide();
 			System.out.println("Registering Patient to BedSide");
-			message = bedSide.registerPatientToBedSide(patientName, patientID, nurseRmiRegistryName, admitDate, patientType);
-			return message;
+			bedSide.registerPatientToBedSide(patientName, patientID, nurseRmiRegistryName, admitDate, patientType);
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an exception when trying to register patient to bedside!");
 			excep.printStackTrace();
 		}
-		return message;
 		
 	}
 	

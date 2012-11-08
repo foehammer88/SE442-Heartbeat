@@ -98,7 +98,7 @@ public class Patient implements Runnable {
 	//Time Stamp, Blood Pressure, Pulse, Temperature, Respiratory Rate, Alarm type, Alarm Acknowledged
 	private void generateVitalSigns(){
 		
-		if(patientType == "Adult"){
+		if(patientType.equals("Adult")){
 			
 			patientBPHigh = 120;
 			patientBPLow = 110;
@@ -109,7 +109,7 @@ public class Patient implements Runnable {
 			patientRespRateHigh = 20;
 			patientRespRateLow = 10;
 			
-		}else if(patientType == "Child"){
+		}else if(patientType.equals("Child")){
 			
 			patientBPHigh = 120;
 			patientBPLow = 80;
@@ -120,7 +120,7 @@ public class Patient implements Runnable {
 			patientRespRateHigh = 30;
 			patientRespRateLow = 20;
 			
-		}else if(patientType == "Infant"){
+		}else if(patientType.equals("Infant")){
 			
 			patientBPHigh = 100;
 			patientBPLow = 70;
@@ -131,7 +131,7 @@ public class Patient implements Runnable {
 			patientRespRateHigh = 30;
 			patientRespRateLow = 20;
 			
-		}else if(patientType == "Adolescent"){
+		}else if(patientType.equals("Adolescent")){
 			
 			patientBPHigh = 120;
 			patientBPLow = 110;
@@ -196,17 +196,17 @@ public class Patient implements Runnable {
 
 		//Generating alarm 
 		if (patientType == "Adult" ) { 	
-			if (patientBloodPressure > 115) { 
+			if (patientBloodPressure >= 119) { 
 				generateAlarm("Red");
 			}
 			System.out.println(patientTemp);
-			if (patientTemp > 90) { 
+			if (patientTemp > 100) { 
 				generateAlarm("Red");
 			}
-			if (patientPulse > 95) { 
+			if (patientPulse > 105) { 
 				generateAlarm("Red");
 			}
-			if (patientRespRate > 15) { 
+			if (patientRespRate > 20) { 
 				generateAlarm("Red");
 			}
 		}
@@ -217,6 +217,7 @@ public class Patient implements Runnable {
 			patientHistory[5] = 1;
 			try {
 				Alarm.tripAlarm("Yellow", alarmType);
+				bedInterface.setAlarmForBedSide("Yellow");
 			} catch (NotBoundException e) {
 				System.out.println("Warning! Found an exception trying to generate alarm.");
 				e.printStackTrace();
@@ -225,6 +226,7 @@ public class Patient implements Runnable {
 			patientHistory[5] = 2;
 			try {
 				Alarm.tripAlarm("Red", alarmType);
+				bedInterface.setAlarmForBedSide("Red");
 			} catch (NotBoundException e) {
 				System.out.println("Warning! Found an exception trying to generate alarm.");
 				e.printStackTrace();

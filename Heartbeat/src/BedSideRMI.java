@@ -11,7 +11,7 @@ public interface BedSideRMI extends Remote{
 
 	public ArrayList<ArrayList> getPatientTrendInfo() throws RemoteException; 
 	
-	public String registerPatientToBedSide(String patiendName, String patientID, String nurseRegistryID, String admitDate, String patientType) throws RemoteException; 
+	public void registerPatientToBedSide(String patiendName, String patientID, String nurseRegistryID, String admitDate, String patientType) throws RemoteException; 
 
 	public void dischargePatientFromBedSide(String patientID, String dischargeDate) throws RemoteException; 
 	

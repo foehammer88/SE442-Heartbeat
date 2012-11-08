@@ -12,6 +12,7 @@ public class Alarm {
     private static Registry registry;
     private static ArrayList<AlarmPair> buffer = new ArrayList<AlarmPair>();
     private static boolean nurseAlarmBufferFull = false; 
+   
     /**
      * Initializes this class' reference to the RMI Registry
      * @param host The host name of the machine the registry is located on

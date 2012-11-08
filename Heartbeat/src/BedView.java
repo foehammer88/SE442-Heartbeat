@@ -310,6 +310,14 @@ public class BedView extends MonitorView{
 		});
 		mnFile.add(mntmNewPatient);
 		
+		JMenuItem mntmGetPatient = new JMenuItem("Get Patient");
+		mntmGetPatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				getPatient();
+			}
+		});
+		mnFile.add(mntmGetPatient);
+		
 		JSeparator separator = new JSeparator();
 		mnFile.add(separator);
 		
@@ -351,6 +359,13 @@ public class BedView extends MonitorView{
 		bedInterface.registerPatient(name, type, idInt.toString(), df.format(today));
 	}
 	
+	public void getPatient() { 
+		Patient localPatient = bedInterface.getPatient(); 
+		txtpnPatientName.setText("Patient Name: " + localPatient.getPatientName());
+		txtpnPatientId.setText("Patient ID: " + localPatient.getPatientId());
+		bedInterface.startCollectingVitals();
+	}
+	
 	public void updateVitals(String bp, String hr, String temp, String rr){
 		textPaneBP.setText(bp);
 		textPaneHR.setText(hr);
@@ -359,6 +374,7 @@ public class BedView extends MonitorView{
 	}
 
 	public void setAlarm(String degree){
+		System.out.println("Alarm degree is:" + degree);
 		if (degree.equals("Red")){
 			panel_AlarmCode.setBackground(Color.RED);
 		} else if(degree.equals("Yellow")){

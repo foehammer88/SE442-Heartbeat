@@ -40,13 +40,9 @@ public class BedInterface{
 	public void registerPatient(String patientName, String patientType, String patientID, String admitDate) { 
 		
 		//Create a new patient
-		patient = new Patient(patientName, patientID, admitDate, "", patientType, 1000);
+		patient = new Patient(patientName, patientID, admitDate, "", patientType, 5000);
 		patient.setController(this);
-		System.out.println("Patient Registerd is: " + patient.getPatientName());
-	
-		//Generate Patient Vitals 
-		System.out.println("Generating Automatic Patient Vital Signs");
-		patient.startPatientVitalSigns();
+		System.out.println("Patient Registerd is: " + patient.getPatientName() + ":" + patientType + ".");
 	}
 	
 	/**
@@ -79,8 +75,23 @@ public class BedInterface{
 		patient.acknowledgeAlarm("yes");
 	}
 	
+	public void setAlarmForBedSide(String degree) { 
+		
+		bedView.setAlarm(degree);
+	}
+	
+	public Patient getPatient() { 
+		return patient;
+	}
+	
 	public void setBedSideComm(BedSideCommunicator bedSideComm) { 
 		this.bedSideComm = bedSideComm;
+	}
+	
+	public void startCollectingVitals() { 
+		//Generate Patient Vitals 
+		System.out.println("Generating Automatic Patient Vital Signs");
+		patient.startPatientVitalSigns();
 	}
 	
 	/**
