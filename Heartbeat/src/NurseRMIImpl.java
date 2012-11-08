@@ -41,10 +41,11 @@ public class NurseRMIImpl extends UnicastRemoteObject implements NurseRMI{
 	
 	private void notifyNurseStationAlarmInBuffer(ArrayList<AlarmPair> alarmQueue) { 
 		
+		System.out.println("Display alarm to UI");
 		AlarmPair localAlarmObject = alarmQueue.get(0);
 		String alarmDegree = localAlarmObject.getAlarmType();
 		String patientID = localAlarmObject.getId();
-		nurseStation.alarmRaised(alarmDegree);
+		nurseStation.alarmRaised(patientID, "vital", alarmDegree);
 	}
 	
 	public void receivePatientVitals(String bp, String hr, String temp, String rr) throws RemoteException{ 
@@ -54,6 +55,7 @@ public class NurseRMIImpl extends UnicastRemoteObject implements NurseRMI{
 	
 	public void alarmRaised(AlarmPair alarmObject) throws RemoteException{ 
 		
+		System.out.println("Received alarm.");
 		if (checkIfAlarmBufferFull()) { 
 			notifyBedSideOfAlarmBuffer(true);
 		} else { 
