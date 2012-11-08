@@ -33,6 +33,7 @@ public class GraphPanel extends JPanel{
 	public void setGraph(ArrayList<Integer> data, String type){
 		dataPoints = data;
 		graphType = type;
+		paintComponent(getGraphics());
 	}
 	
 	private void drawGraph(Graphics g) {

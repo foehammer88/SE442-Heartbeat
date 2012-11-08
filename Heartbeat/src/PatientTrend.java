@@ -25,10 +25,16 @@ import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class PatientTrend {
 
+	private NurseView nurseView;
+	
 	private JFrame frmPatientTrend;
 
 	private JList patientList;
@@ -39,10 +45,17 @@ public class PatientTrend {
     private ArrayList<Integer> dataTemp;
     private ArrayList<Integer> dataRR;
     
-    GraphPanel gPanelBP;
-    GraphPanel gPanelHR;
-    GraphPanel gPanelTemp;
-    GraphPanel gPanelRR;
+    private JPanel panelGraphs;
+    
+    private JLabel lblBP;
+    private JLabel lblHR;
+    private JLabel lblTemp;
+    private JLabel lblRR;
+    
+    private GraphPanel gPanelBP;
+    private GraphPanel gPanelHR;
+    private GraphPanel gPanelTemp;
+    private GraphPanel gPanelRR;
     
 	/**
 	 * Launch the application.
@@ -69,6 +82,7 @@ public class PatientTrend {
 				try {
 					PatientTrend window = new PatientTrend();
 					window.frmPatientTrend.setVisible(true);
+					//window.simulateGraphs();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,6 +95,22 @@ public class PatientTrend {
         listModel.addElement("John Doe");
         listModel.addElement("John Smith");
         listModel.addElement("Patrick Ganson");
+        
+        EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frmPatientTrend.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		initialize();
+	}
+	
+	public PatientTrend(NurseView nv, DefaultListModel patientList) {
+		listModel = patientList;
+        nurseView = nv;
         
         EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -180,8 +210,16 @@ public class PatientTrend {
 		
 		
 		patientList = new JList(listModel);
+		patientList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				System.out.println(patientList.getSelectedValue());
+				nurseView.getPatientData(patientList.getSelectedValue().toString());
+				simulateGraphs();
+			}
+		});
 		patientList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		patientList.setSelectedIndex(0);
+		//patientList.setSelectedIndex(0);
 		//patientList.addListSelectionListener(this);
 		patientList.setVisibleRowCount(5);
 		JScrollPane listScrollPane = new JScrollPane(patientList);
@@ -190,55 +228,42 @@ public class PatientTrend {
 		JLabel lblPatients = new JLabel("Patients");
 		listScrollPane.setColumnHeaderView(lblPatients);
 		
-		JPanel panel_1 = new JPanel();
-		frmPatientTrend.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new GridLayout(2, 2, 0, 0));
+		panelGraphs = new JPanel();
+		frmPatientTrend.getContentPane().add(panelGraphs, BorderLayout.CENTER);
+		panelGraphs.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		ArrayList<Integer> dataBP = new ArrayList<Integer>();
-		Random rand = new Random();
-		for(int i = 0; i < 100; i++){
-			dataBP.add(rand.nextInt(200 - 60 + 1) + 60);
-		}
-		gPanelBP = new GraphPanel(dataBP, "BP");
+		
+		gPanelBP = new GraphPanel();
 		gPanelBP.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		gPanelBP.setBackground(Color.WHITE);
-		JLabel lblSystolic = new JLabel("Systolic Blood Pressure");
-		lblSystolic.setForeground(Color.WHITE);
-		gPanelBP.add(lblSystolic);
-		panel_1.add(gPanelBP);
+		lblBP = new JLabel("Systolic Blood Pressure");
+		lblBP.setForeground(Color.WHITE);
+		gPanelBP.add(lblBP);
+		panelGraphs.add(gPanelBP);
 		
-		ArrayList<Integer> dataHR = new ArrayList<Integer>();
-		for(int i = 0; i < 10; i++){
-			dataHR.add(rand.nextInt(200 - 0 + 1) + 0);
-		}
-		gPanelHR = new GraphPanel(dataHR, "HR");
+		
+		gPanelHR = new GraphPanel();
 		gPanelHR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		JLabel lblHR = new JLabel("Heart Rate");
+		lblHR = new JLabel("Heart Rate");
 		lblHR.setForeground(Color.WHITE);
 		gPanelHR.add(lblHR);
-		panel_1.add(gPanelHR);
+		panelGraphs.add(gPanelHR);
 		
-		ArrayList<Integer> dataTemp = new ArrayList<Integer>();
-		for(int i = 0; i < 10; i++){
-			dataTemp.add(rand.nextInt(120 - 50 + 1) + 50);
-		}
-		gPanelTemp = new GraphPanel(dataTemp, "Temp");
+		
+		gPanelTemp = new GraphPanel();
 		gPanelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		JLabel lblTemp = new JLabel("Temperature");
+		lblTemp = new JLabel("Temperature");
 		lblTemp.setForeground(Color.WHITE);
 		gPanelTemp.add(lblTemp);
-		panel_1.add(gPanelTemp);
+		panelGraphs.add(gPanelTemp);
 		
-		ArrayList<Integer> dataRR = new ArrayList<Integer>();
-		for(int i = 0; i < 10; i++){
-			dataRR.add(rand.nextInt(150 - 0 + 1) + 0);
-		}
-		gPanelRR = new GraphPanel(dataRR, "RR");
+		
+		gPanelRR = new GraphPanel();
 		gPanelRR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		JLabel lblRR = new JLabel("Respiratory Rate");
+		lblRR = new JLabel("Respiratory Rate");
 		lblRR.setForeground(Color.WHITE);
 		gPanelRR.add(lblRR);
-		panel_1.add(gPanelRR);
+		panelGraphs.add(gPanelRR);
 	}
 	
 	public void drawGraphs(ArrayList<Integer> dBP, ArrayList<Integer> dHR, ArrayList<Integer> dTemp,
@@ -247,6 +272,35 @@ public class PatientTrend {
 	    dataHR = dHR;
 	    dataTemp = dTemp;
 	    dataRR = dRR;
-	    
+
+	    gPanelBP.setGraph(dataBP, "BP");
+	    gPanelBP.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+	    gPanelHR.setGraph(dataHR, "HR");
+	    gPanelHR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+	    gPanelTemp.setGraph(dataTemp, "Temp");
+	    gPanelTemp.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+	    gPanelRR.setGraph(dataRR, "RR");
+	    gPanelRR.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+	}
+	
+	public void simulateGraphs(){
+		ArrayList<Integer> dataBP = new ArrayList<Integer>();
+		Random rand = new Random();
+		for(int i = 0; i < 100; i++){
+			dataBP.add(rand.nextInt(200 - 60 + 1) + 60);
+		}
+		ArrayList<Integer> dataHR = new ArrayList<Integer>();
+		for(int i = 0; i < 10; i++){
+			dataHR.add(rand.nextInt(200 - 0 + 1) + 0);
+		}
+		ArrayList<Integer> dataTemp = new ArrayList<Integer>();
+		for(int i = 0; i < 10; i++){
+			dataTemp.add(rand.nextInt(120 - 50 + 1) + 50);
+		}
+		ArrayList<Integer> dataRR = new ArrayList<Integer>();
+		for(int i = 0; i < 10; i++){
+			dataRR.add(rand.nextInt(150 - 0 + 1) + 0);
+		}
+		drawGraphs(dataBP, dataHR, dataTemp, dataRR);
 	}
 }

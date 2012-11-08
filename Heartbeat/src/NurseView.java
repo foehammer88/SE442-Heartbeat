@@ -318,7 +318,7 @@ public class NurseView extends MonitorView{
 		} else if(degree.equals("Yellow")){
 			panel_AlarmCode.setBackground(Color.YELLOW);
 		}
-		
+		panel_AlarmCode.revalidate();
 		if (vital.equals("BP")){
 			radioBP.setSelected(true);
 		} else if (vital.equals("HR")){
@@ -328,6 +328,11 @@ public class NurseView extends MonitorView{
 		} else if (vital.equals("RR")){
 			radioRR.setSelected(true);
 		}
+	}
+
+	public void getPatientData(String patientName) {
+		// TODO Auto-generated method stub
+		nurseStation.getPatientTrendData(patientName);
 	}
 	
 }
