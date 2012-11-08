@@ -105,9 +105,9 @@ public class NurseStation {
 	 * Method in which alarm raised will be shown to the nurse user interface.
 	 * @param alarmObject
 	 */
-	public void alarmRaised(String alarmDegree) { 
+	public void alarmRaised(String patientName, String vital, String degree) { 
 		
-		
+		nurseView.setAlarm(patientName, vital, degree);
 	}
 	
 	/**
