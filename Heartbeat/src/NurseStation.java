@@ -129,7 +129,7 @@ public class NurseStation {
 			nurseAlarmReceiver.bindToRegistry();
 			
 			//Show Nurse UI 
-			nurseUI.main(null);
+			
 			
 		} catch (Exception excep) { 
 			System.out.println("Warning! Found an Exception in starting Nurse System");
