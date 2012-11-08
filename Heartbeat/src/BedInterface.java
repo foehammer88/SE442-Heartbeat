@@ -1,4 +1,5 @@
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * 
@@ -65,9 +66,9 @@ public class BedInterface{
 	/**
 	 * Method to get patient trend data. 
 	 */
-	public void getPatientTrendDate() { 
+	public ArrayList<ArrayList> getPatientTrendDate() { 
 		
-		patient.getPatientTrendData();
+		return patient.getPatientTrendData();
 	}
 	
 	/**
