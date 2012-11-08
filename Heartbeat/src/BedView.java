@@ -107,6 +107,22 @@ public class BedView extends MonitorView{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		try {
+            // Set System L&F
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		}
+		catch (ClassNotFoundException e) {
+			// handle exception
+		}
+		catch (InstantiationException e) {
+			// handle exception
+		}
+		catch (IllegalAccessException e) {
+			// handle exception
+		}
 		frmBedsideMonitor = new JFrame();
 		frmBedsideMonitor.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\AnDev\\git\\SE442-Heartbeat\\Heartbeat\\heartbeat.jpg"));
 		frmBedsideMonitor.setTitle("Bedside Monitor\r\n");
