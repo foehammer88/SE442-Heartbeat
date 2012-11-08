@@ -196,7 +196,7 @@ public class Patient implements Runnable {
 
 		//Generating alarm 
 		if (patientType == "Adult" ) { 	
-			if (patientBloodPressure >= 119) { 
+			if (patientBloodPressure >= 118) { 
 				generateAlarm("Red");
 			}
 			System.out.println(patientTemp);
