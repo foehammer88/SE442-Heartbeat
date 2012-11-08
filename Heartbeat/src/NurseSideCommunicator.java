@@ -3,6 +3,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  * 
@@ -65,16 +66,18 @@ public class NurseSideCommunicator extends UnicastRemoteObject{
 		}
 	}
 	
-	public void getPatientTrendData(String patientID) { 
+	public ArrayList<ArrayList> getPatientTrendData(String patientID) { 
 		
+		ArrayList<ArrayList> local = null;
 		try { 
 			connectoBedSide();
-			bedSide.getPatientTrendInfo();
+			local = bedSide.getPatientTrendInfo();
 			
 		} catch(Exception excep) { 
 			System.out.println("Warning! Found an exception trying to fetch patient trend data"); 
 			excep.printStackTrace();
 		}
+		return local;
 	}
 	
 	public void sendNurseSideBufferInfo(boolean status) { 

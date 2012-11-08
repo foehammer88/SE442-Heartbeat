@@ -235,7 +235,7 @@ public class PatientTrend {
 			public void mouseClicked(MouseEvent arg0) {
 				System.out.println(patientList.getSelectedValue());
 				nurseView.getPatientData(patientList.getSelectedValue().toString(), patientTrend);
-				simulateGraphs();
+				//simulateGraphs();
 			}
 		});
 		patientList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

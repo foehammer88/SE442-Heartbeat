@@ -1,5 +1,6 @@
 import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -85,9 +86,9 @@ public class NurseStation {
 	 * @param patientID - the id of patient 
 	 * @param patientTrend 
 	 */
-	public void getPatientTrendData(String patientID, PatientTrend patientTrend) { 
+	public ArrayList<ArrayList> getPatientTrendData(String patientID, PatientTrend patientTrend) { 
 		
-		communicator.getPatientTrendData(patientID);
+		return communicator.getPatientTrendData(patientID);
 	}
 	
 	/**

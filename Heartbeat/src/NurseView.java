@@ -23,6 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -340,6 +341,11 @@ public class NurseView extends MonitorView{
 		textPaneHR.setText(hr);
 		textPaneTemp.setText(temp);
 		textPaneRR.setText(rr);
+		
+		if (winPatientTrend!= null) {
+			ArrayList<ArrayList> trend = nurseStation.getPatientTrendData("", winPatientTrend);
+			winPatientTrend.drawGraphs(trend.get(0), trend.get(1), trend.get(2), trend.get(3));
+		}
 	}
 	
 	public void setAlarm(String patientName, String vital, String degree){
@@ -363,7 +369,9 @@ public class NurseView extends MonitorView{
 
 	public void getPatientData(String patientName, PatientTrend patientTrend) {
 		// TODO Auto-generated method stub
-		nurseStation.getPatientTrendData(patientName, patientTrend);
+		ArrayList<ArrayList> trend = nurseStation.getPatientTrendData(patientName, patientTrend);
+		patientTrend.drawGraphs(trend.get(0), trend.get(1), trend.get(2), trend.get(3));
+		
 	}
 	
 }

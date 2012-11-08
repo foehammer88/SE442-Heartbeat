@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
@@ -32,6 +34,11 @@ public class Patient implements Runnable {
 	private Integer interval;
 	private Integer[] patientHistory = new Integer[7];
 	private Random rand = new Random();
+	private ArrayList<Integer> bpTrend = new ArrayList<Integer>(400);
+	private ArrayList<Integer> hrTrend = new ArrayList<Integer>(400);
+	private ArrayList<Integer> rrTrend = new ArrayList<Integer>(400);
+	private ArrayList<Integer> tempTrend = new ArrayList<Integer>(400);
+	
 	
 	private BedInterface bedInterface;
 	
@@ -75,8 +82,15 @@ public class Patient implements Runnable {
 	}
 	
 	//Returns patientTrendData
-	public String getPatientTrendData() {
-		return "blah";
+	public ArrayList<ArrayList> getPatientTrendData() {
+		
+		ArrayList<ArrayList> trendCollection = new ArrayList();
+		trendCollection.add(bpTrend);
+		trendCollection.add(hrTrend);
+		trendCollection.add(tempTrend);
+		trendCollection.add(rrTrend);
+		
+		return trendCollection;
 	}
 	
 	
@@ -140,36 +154,38 @@ public class Patient implements Runnable {
 			randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
 			patientBloodPressure = randomNum;
 			patientHistory[1] = patientBloodPressure;
-			
+			bpTrend.add(patientBloodPressure);
 		}else if(patientHistory[5] == 2){
 			patientBPHigh = 140;
 			patientBPLow = 131;
 			randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
 			patientBloodPressure = randomNum;
 			patientHistory[1] = patientBloodPressure;
+			bpTrend.add(patientBloodPressure);
 		}else{
 			randomNum = rand.nextInt(patientBPHigh - patientBPLow + 1) + patientBPLow;
 			patientBloodPressure = randomNum;
 			patientHistory[1] = patientBloodPressure;
-			
+			bpTrend.add(patientBloodPressure);
 		}
 		
 		//Pulse
 		randomNum = rand.nextInt(patientPulseHigh - patientPulseLow + 1) + patientPulseLow;
 		patientPulse = randomNum;
 		patientHistory[2] = patientPulse;
-		
+		hrTrend.add(patientPulse);
 		
 		//Temperature
 		randomNum = rand.nextInt(patientTempHigh - patientTempLow + 1) + patientTempLow;
 		patientTemp = randomNum;
 		patientHistory[3] = patientTemp;
-		
+		tempTrend.add(patientTemp);
 		
 		//Respiratory Rate
 		randomNum = rand.nextInt(patientRespRateHigh - patientRespRateLow + 1) + patientRespRateLow;
 		patientRespRate = randomNum;
 		patientHistory[4] = patientRespRate;
+		rrTrend.add(patientRespRate);
 		
 		//Send patient vital signs 
 		String hr = String.valueOf(patientPulse);
